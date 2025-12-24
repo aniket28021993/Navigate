@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  navigate-api:
+    build:
+      context: ./Navigate
+      dockerfile: Navigate.Server/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: "Server=navigate-db,1433;Database=NavigateDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True"
+      Jwt__Issuer: "Navigate"
+      Jwt__Audience: "Navigate.Client"
+      Jwt__SigningKey: "dev-signing-key-change-me-please"
+      Jwt__TokenMinutes: 60
+    depends_on:
+      - navigate-db
+
+  navigate-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "YourStrong!Passw0rd"
+    ports:
+      - "1433:1433"
+    volumes:
+      - navigate-sql:/var/opt/mssql
+
+volumes:
+  navigate-sql:
