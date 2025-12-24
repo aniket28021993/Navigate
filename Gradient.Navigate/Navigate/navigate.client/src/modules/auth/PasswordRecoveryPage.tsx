@@ -1,13 +1,17 @@
 import { AuthLayout } from './AuthLayout'
 
-export function PasswordRecoveryPage() {
+interface PasswordRecoveryPageProps {
+  onBackToLogin: () => void
+}
+
+export function PasswordRecoveryPage({ onBackToLogin }: PasswordRecoveryPageProps) {
   return (
     <AuthLayout
       title="Password Recovery"
       subtitle="Verify your profile and reset your credentials."
       helper="Use the captcha below to validate your identity."
       footer={
-        <button className="auth-button auth-button--secondary" type="button">
+        <button className="auth-button auth-button--secondary" type="button" onClick={onBackToLogin}>
           Back to Login Page
         </button>
       }

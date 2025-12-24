@@ -1,13 +1,17 @@
 import { AuthLayout } from './AuthLayout'
 
-export function RegistrationPage() {
+interface RegistrationPageProps {
+  onBackToLogin: () => void
+}
+
+export function RegistrationPage({ onBackToLogin }: RegistrationPageProps) {
   return (
     <AuthLayout
       title="Account Registration"
       subtitle="Create a new Gradient NaviGATE profile."
       helper="All fields are required for initial access provisioning."
       footer={
-        <button className="auth-button auth-button--secondary" type="button">
+        <button className="auth-button auth-button--secondary" type="button" onClick={onBackToLogin}>
           Back to Login Page
         </button>
       }
