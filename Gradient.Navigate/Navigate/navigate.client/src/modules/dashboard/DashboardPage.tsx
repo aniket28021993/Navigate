@@ -1,4 +1,9 @@
+import { useMemo, useState } from 'react'
 import { AppShell } from '../shared/layout/AppShell'
+import { ContactPanel } from '../management/ContactPanel'
+import { EmployeePanel } from '../management/EmployeePanel'
+import { EquipmentPanel } from '../management/EquipmentPanel'
+import { PaymentPanel } from '../management/PaymentPanel'
 
 const stats = [
   { label: 'Loads in transit', value: '128', trend: '+12% vs last week' },
@@ -86,7 +91,31 @@ const tasks = [
   },
 ]
 
+const managementTabs = [
+  { key: 'employee', label: 'Employee' },
+  { key: 'contact', label: 'Contact' },
+  { key: 'equipment', label: 'Equipment' },
+  { key: 'payment', label: 'Payment Method' },
+] as const
+
+type ManagementKey = (typeof managementTabs)[number]['key']
+
 export function DashboardPage() {
+  const [activeTab, setActiveTab] = useState<ManagementKey>('employee')
+
+  const managementContent = useMemo(() => {
+    switch (activeTab) {
+      case 'contact':
+        return <ContactPanel />
+      case 'equipment':
+        return <EquipmentPanel />
+      case 'payment':
+        return <PaymentPanel />
+      default:
+        return <EmployeePanel />
+    }
+  }, [activeTab])
+
   return (
     <AppShell>
       <div className="dashboard">
@@ -195,6 +224,28 @@ export function DashboardPage() {
               ))}
             </div>
           </article>
+        </section>
+
+        <section className="management">
+          <header className="management__header">
+            <div>
+              <h2>Dashboard Services</h2>
+              <p>Quick access to employee records, contacts, equipment, and payment methods.</p>
+            </div>
+            <div className="management__tabs">
+              {managementTabs.map((tab) => (
+                <button
+                  key={tab.key}
+                  className={`management__tab${activeTab === tab.key ? ' management__tab--active' : ''}`}
+                  type="button"
+                  onClick={() => setActiveTab(tab.key)}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </header>
+          <div className="management__content">{managementContent}</div>
         </section>
       </div>
     </AppShell>
