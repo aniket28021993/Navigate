@@ -31,3 +31,13 @@
 /Gradient.Navigate/Navigate/Navigate.Server/obj/Debug/net8.0/staticwebassets.build.json
 /Gradient.Navigate/Navigate/Navigate.Server/obj/Debug/net8.0/staticwebassets.build.json.cache
 /Gradient.Navigate/Navigate/Navigate.Server/obj/Debug/net8.0/staticwebassets.references.upToDateCheck.txt
+/Gradient.Navigate/.vs/ProjectEvaluation/gradient.navigate.metadata.v9.bin
+*.bin
+/Gradient.Navigate/Navigate/Navigate.Application/bin/Debug/net8.0
+/Gradient.Navigate/Navigate/Navigate.Application/obj
+/Gradient.Navigate/Navigate/Navigate.Domain/bin/Debug/net8.0
+/Gradient.Navigate/Navigate/Navigate.Domain/obj/Debug/net8.0
+/Gradient.Navigate/Navigate/Navigate.Domain/obj
+/Gradient.Navigate/Navigate/Navigate.Infrastructure/bin/Debug/net8.0
+/Gradient.Navigate/Navigate/Navigate.Infrastructure/obj/Debug/net8.0
+/Gradient.Navigate/Navigate/Navigate.Infrastructure/obj
