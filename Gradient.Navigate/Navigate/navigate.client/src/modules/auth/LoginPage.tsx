@@ -1,9 +1,21 @@
+import type { FormEvent } from 'react'
 import { AuthLayout } from './AuthLayout'
 
-export function LoginPage() {
+interface LoginPageProps {
+  onLogin: () => void
+  onNavigateRecovery: () => void
+  onNavigateRegistration: () => void
+}
+
+export function LoginPage({ onLogin, onNavigateRecovery, onNavigateRegistration }: LoginPageProps) {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    onLogin()
+  }
+
   return (
     <AuthLayout title="Sign in" subtitle="Access your dispatch and compliance workspace.">
-      <form className="auth-form">
+      <form className="auth-form" onSubmit={handleSubmit}>
         <label className="auth-field">
           <span className="auth-field__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
@@ -24,12 +36,30 @@ export function LoginPage() {
         </label>
         <div className="auth-links">
           <span>Forgot your password?</span>
-          <a className="auth-link" href="#">Password Recovery</a>
+          <a
+            className="auth-link"
+            href="#password-recovery"
+            onClick={(event) => {
+              event.preventDefault()
+              onNavigateRecovery()
+            }}
+          >
+            Password Recovery
+          </a>
         </div>
         <button type="submit" className="auth-button auth-button--primary">Login</button>
         <div className="auth-links auth-links--secondary">
           <span>New account?</span>
-          <a className="auth-link" href="#">Account Registration</a>
+          <a
+            className="auth-link"
+            href="#account-registration"
+            onClick={(event) => {
+              event.preventDefault()
+              onNavigateRegistration()
+            }}
+          >
+            Account Registration
+          </a>
         </div>
       </form>
     </AuthLayout>
