@@ -2,10 +2,10 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using Navigate.Server.Application.Services;
-using Navigate.Server.Domain.Entities;
-using Navigate.Server.Infrastructure;
-using Navigate.Server.Infrastructure.Security;
+using Navigate.Application.Services;
+using Navigate.Domain.Entities;
+using Navigate.Infrastructure;
+using Navigate.Infrastructure.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 

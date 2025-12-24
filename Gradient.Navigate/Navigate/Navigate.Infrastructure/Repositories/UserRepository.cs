@@ -1,10 +1,10 @@
 using System.Data;
 using Microsoft.Data.SqlClient;
-using Navigate.Server.Application.Interfaces;
-using Navigate.Server.Domain.Entities;
-using Navigate.Server.Infrastructure.Data;
+using Navigate.Application.Interfaces;
+using Navigate.Domain.Entities;
+using Navigate.Infrastructure.Data;
 
-namespace Navigate.Server.Infrastructure.Repositories;
+namespace Navigate.Infrastructure.Repositories;
 
 public sealed class UserRepository : IUserRepository
 {

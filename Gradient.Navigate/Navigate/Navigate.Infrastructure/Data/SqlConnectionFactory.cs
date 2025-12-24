@@ -1,7 +1,7 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
-namespace Navigate.Server.Infrastructure.Data;
+namespace Navigate.Infrastructure.Data;
 
 public sealed class SqlConnectionFactory
 {

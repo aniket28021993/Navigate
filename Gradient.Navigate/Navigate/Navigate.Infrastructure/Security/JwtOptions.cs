@@ -1,4 +1,4 @@
-namespace Navigate.Server.Infrastructure.Security;
+namespace Navigate.Infrastructure.Security;
 
 public sealed class JwtOptions
 {

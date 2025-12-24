@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Identity;
-using Navigate.Server.Application.Interfaces;
-using Navigate.Server.Application.Models;
-using Navigate.Server.Domain.Entities;
+using Navigate.Application.Interfaces;
+using Navigate.Application.Models;
+using Navigate.Domain.Entities;
 
-namespace Navigate.Server.Application.Services;
+namespace Navigate.Application.Services;
 
 public sealed class AuthService
 {
