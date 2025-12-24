@@ -4,14 +4,97 @@
     "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Server\\Navigate.Server.csproj": {}
   },
   "projects": {
-    "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Server\\Navigate.Server.csproj": {
+    "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Application\\Navigate.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Server\\Navigate.Server.csproj",
-        "projectName": "Navigate.Server",
-        "projectPath": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Server\\Navigate.Server.csproj",
+        "projectUniqueName": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Application\\Navigate.Application.csproj",
+        "projectName": "Navigate.Application",
+        "projectPath": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Application\\Navigate.Application.csproj",
         "packagesPath": "C:\\Users\\abcom\\.nuget\\packages\\",
-        "outputPath": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Server\\obj\\",
+        "outputPath": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages",
+          "C:\\Program Files\\DevExpress 23.2\\Components\\Offline Packages",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\abcom\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 23.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\DevExpress 22.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files\\DevExpress 23.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Domain\\Navigate.Domain.csproj": {
+                "projectPath": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Domain\\Navigate.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.3.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Domain\\Navigate.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Domain\\Navigate.Domain.csproj",
+        "projectName": "Navigate.Domain",
+        "projectPath": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Domain\\Navigate.Domain.csproj",
+        "packagesPath": "C:\\Users\\abcom\\.nuget\\packages\\",
+        "outputPath": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages",
@@ -57,7 +140,204 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Infrastructure\\Navigate.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Infrastructure\\Navigate.Infrastructure.csproj",
+        "projectName": "Navigate.Infrastructure",
+        "projectPath": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Infrastructure\\Navigate.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\abcom\\.nuget\\packages\\",
+        "outputPath": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages",
+          "C:\\Program Files\\DevExpress 23.2\\Components\\Offline Packages",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\abcom\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 23.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\DevExpress 22.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files\\DevExpress 23.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Application\\Navigate.Application.csproj": {
+                "projectPath": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Application\\Navigate.Application.csproj"
+              },
+              "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Domain\\Navigate.Domain.csproj": {
+                "projectPath": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Domain\\Navigate.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[5.2.2, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Microsoft.Extensions.Options.ConfigurationExtensions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[8.2.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Server\\Navigate.Server.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Server\\Navigate.Server.csproj",
+        "projectName": "Navigate.Server",
+        "projectPath": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Server\\Navigate.Server.csproj",
+        "packagesPath": "C:\\Users\\abcom\\.nuget\\packages\\",
+        "outputPath": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Server\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages",
+          "C:\\Program Files\\DevExpress 23.2\\Components\\Offline Packages",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\abcom\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 23.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\DevExpress 22.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files\\DevExpress 23.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Application\\Navigate.Application.csproj": {
+                "projectPath": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Application\\Navigate.Application.csproj"
+              },
+              "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Domain\\Navigate.Domain.csproj": {
+                "projectPath": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Domain\\Navigate.Domain.csproj"
+              },
+              "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Infrastructure\\Navigate.Infrastructure.csproj": {
+                "projectPath": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Infrastructure\\Navigate.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
             "Microsoft.AspNetCore.SpaProxy": {
               "target": "Package",
               "version": "[8.*-*, )"
