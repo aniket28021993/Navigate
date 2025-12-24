@@ -1,4 +1,4 @@
-namespace Navigate.Server.Application.Models;
+namespace Navigate.Application.Models;
 
 public sealed class AuthResult
 {

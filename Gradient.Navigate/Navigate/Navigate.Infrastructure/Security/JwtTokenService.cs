@@ -3,10 +3,10 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Navigate.Server.Application.Interfaces;
-using Navigate.Server.Domain.Entities;
+using Navigate.Application.Interfaces;
+using Navigate.Domain.Entities;
 
-namespace Navigate.Server.Infrastructure.Security;
+namespace Navigate.Infrastructure.Security;
 
 public sealed class JwtTokenService : IJwtTokenService
 {

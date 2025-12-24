@@ -1,4 +1,4 @@
-namespace Navigate.Server.Domain.Entities;
+namespace Navigate.Domain.Entities;
 
 public sealed class User
 {

@@ -20,6 +20,9 @@ FROM with-node AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Navigate/Navigate.Server/Navigate.Server.csproj", "Navigate/Navigate.Server/"]
+COPY ["Navigate/Navigate.Application/Navigate.Application.csproj", "Navigate/Navigate.Application/"]
+COPY ["Navigate/Navigate.Domain/Navigate.Domain.csproj", "Navigate/Navigate.Domain/"]
+COPY ["Navigate/Navigate.Infrastructure/Navigate.Infrastructure.csproj", "Navigate/Navigate.Infrastructure/"]
 COPY ["navigate.client/navigate.client.esproj", "navigate.client/"]
 RUN dotnet restore "./Navigate/Navigate.Server/Navigate.Server.csproj"
 COPY . .

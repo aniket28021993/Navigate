@@ -1,11 +1,11 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Navigate.Server.Application.Interfaces;
-using Navigate.Server.Infrastructure.Data;
-using Navigate.Server.Infrastructure.Repositories;
-using Navigate.Server.Infrastructure.Security;
+using Navigate.Application.Interfaces;
+using Navigate.Infrastructure.Data;
+using Navigate.Infrastructure.Repositories;
+using Navigate.Infrastructure.Security;
 
-namespace Navigate.Server.Infrastructure;
+namespace Navigate.Infrastructure;
 
 public static class DependencyInjection
 {

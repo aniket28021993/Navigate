@@ -1,17 +1,8 @@
 import './App.css'
-import { AuthPage } from './modules/auth/AuthPage'
-import { DashboardPage } from './modules/dashboard/DashboardPage'
-import { AppShell } from './modules/shared/layout/AppShell'
+import { LoginPage } from './modules/auth/LoginPage'
 
 function App() {
-  return (
-    <AppShell>
-      <div className="app-grid">
-        <DashboardPage />
-        <AuthPage />
-      </div>
-    </AppShell>
-  )
+  return <LoginPage />
 }
 
 export default App

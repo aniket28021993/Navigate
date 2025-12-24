@@ -1,6 +1,6 @@
-using Navigate.Server.Domain.Entities;
+using Navigate.Domain.Entities;
 
-namespace Navigate.Server.Application.Interfaces;
+namespace Navigate.Application.Interfaces;
 
 public interface IJwtTokenService
 {

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Navigate.Server.Application.Models;
-using Navigate.Server.Application.Services;
+using Navigate.Application.Models;
+using Navigate.Application.Services;
 
 namespace Navigate.Server.Controllers;
 
