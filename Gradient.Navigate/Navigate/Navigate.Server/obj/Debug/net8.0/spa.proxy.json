@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:62127",
+"RedirectUrl": "",
+"LaunchCommand": "npm run dev",
+"WorkingDirectory": "D:\\TestProject\\Navigate\\Gradient.Navigate\\Navigate\\Navigate.Server\\..\\navigate.client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}
