@@ -1,0 +1,24 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9bb4da" />
+      <stop offset="60%" stop-color="#d8cfe2" />
+      <stop offset="100%" stop-color="#f5e8e1" />
+    </linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1f2632" />
+      <stop offset="100%" stop-color="#0f1217" />
+    </linearGradient>
+    <linearGradient id="horizon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8d94a4" />
+      <stop offset="100%" stop-color="#5c6f91" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)" />
+  <rect y="900" width="1600" height="300" fill="#2b2f35" />
+  <path d="M0 830C240 760 520 740 820 760C1120 780 1360 760 1600 720V900H0V830Z" fill="url(#horizon)" opacity="0.35" />
+  <path d="M620 1200L760 720H840L980 1200H620Z" fill="url(#road)" />
+  <path d="M795 1200L810 760" stroke="#f5f5f5" stroke-width="10" stroke-dasharray="40 30" />
+  <path d="M700 1200L775 780" stroke="#89909f" stroke-width="6" />
+  <path d="M900 1200L825 780" stroke="#89909f" stroke-width="6" />
+</svg>
