@@ -1,3 +1,4 @@
+import { useMemo, useState } from 'react'
 import { AppShell } from '../shared/layout/AppShell'
 
 const stats = [
@@ -86,7 +87,330 @@ const tasks = [
   },
 ]
 
+const managementTabs = [
+  { key: 'employee', label: 'Employee' },
+  { key: 'contact', label: 'Contact' },
+  { key: 'equipment', label: 'Equipment' },
+  { key: 'payment', label: 'Payment Method' },
+] as const
+
+type ManagementKey = (typeof managementTabs)[number]['key']
+
+const employeeRows = [
+  {
+    lastName: 'Driver',
+    firstName: 'New',
+    phone: '(480) 555-0112',
+    email: 'newdriver@prodemo.com',
+    dob: '1/1/1901',
+    hireDate: '7/31/2025',
+    jobTitle: 'Commercial Driver',
+    licenseNumber: '008012',
+    licenseState: 'AZ',
+    licenseClass: 'A',
+  },
+]
+
+const contactRows = [
+  {
+    name: 'rahultoday',
+    email: 'today@grr.la',
+    phone: '123-458-5555',
+    fax: '424-541-4245',
+    status: 'Active',
+  },
+  {
+    name: 'Suresh Kamat',
+    email: 'newtest@gmail.com',
+    phone: '916-445-9697',
+    fax: '—',
+    status: 'Active',
+  },
+  {
+    name: 'ZXsa',
+    email: 'rahulss@grr.la',
+    phone: '121-353-1111',
+    fax: '—',
+    status: 'Active',
+  },
+]
+
+const equipmentRows = [
+  {
+    unitNumber: 'Unit 18',
+    unitType: 'Reefer',
+    vin: '1HTMMAAL9SH001314',
+    status: 'Active',
+  },
+]
+
+const paymentRows = [
+  {
+    card: '**** **** **** 0080',
+    isDefault: 'Yes',
+    autopay: 'Telematic • Fuel Tax',
+  },
+]
+
+function EmployeePanel() {
+  return (
+    <div className="management-view">
+      <div className="management-view__header">
+        <div>
+          <h2>Employees</h2>
+          <p>Manage Employee Documentation</p>
+        </div>
+        <div className="management-view__logo">
+          <strong>Pro-Demo Hauling</strong>
+          <span>transportation</span>
+        </div>
+      </div>
+      <div className="management-card">
+        <div className="management-card__title">👥 Employees</div>
+        <div className="management-card__toolbar">
+          <div className="management-card__actions">
+            <button type="button" aria-label="Export">⤓</button>
+            <button type="button" aria-label="Copy">⧉</button>
+          </div>
+          <label className="management-card__search">
+            <span>🔍</span>
+            <input type="text" placeholder="Search" />
+          </label>
+        </div>
+        <div className="management-table">
+          <div className="management-table__row management-table__row--header">
+            <span>Last Name</span>
+            <span>First Name</span>
+            <span>Phone</span>
+            <span>Email</span>
+            <span>Date Of Birth</span>
+            <span>Date Of Hire</span>
+            <span>Job Title</span>
+            <span className="management-table__group">Current License</span>
+          </div>
+          <div className="management-table__row management-table__row--subheader">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span>
+              <div className="management-table__license">
+                <span>License #</span>
+                <span>State</span>
+                <span>Class</span>
+              </div>
+            </span>
+          </div>
+          <div className="management-table__row management-table__row--filters">
+            {Array.from({ length: 7 }).map((_, index) => (
+              <span key={`filter-${index}`}>🔍</span>
+            ))}
+            <span>
+              <div className="management-table__license">
+                <span>🔍</span>
+                <span>🔍</span>
+                <span>🔍</span>
+              </div>
+            </span>
+          </div>
+          {employeeRows.map((row) => (
+            <div key={row.email} className="management-table__row">
+              <span>{row.lastName}</span>
+              <span>{row.firstName}</span>
+              <span>{row.phone}</span>
+              <span>{row.email}</span>
+              <span>{row.dob}</span>
+              <span>{row.hireDate}</span>
+              <span>{row.jobTitle}</span>
+              <span>
+                <div className="management-table__license">
+                  <span>{row.licenseNumber}</span>
+                  <span>{row.licenseState}</span>
+                  <span>{row.licenseClass}</span>
+                </div>
+              </span>
+            </div>
+          ))}
+        </div>
+        <div className="management-card__footer">
+          <button className="management-card__primary" type="button">
+            ⬇ Download Roster
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function ContactPanel() {
+  return (
+    <div className="management-view">
+      <div className="management-view__header">
+        <div>
+          <h2>Contact</h2>
+          <p>Manage Contact List</p>
+        </div>
+      </div>
+      <div className="management-card">
+        <div className="management-card__title">👥 Contact</div>
+        <div className="management-card__toolbar">
+          <div />
+          <label className="management-card__search">
+            <span>🔍</span>
+            <input type="text" placeholder="Search" />
+          </label>
+        </div>
+        <div className="management-table management-table--contacts">
+          <div className="management-table__row management-table__row--header">
+            <span>Name</span>
+            <span>Email</span>
+            <span>Phone</span>
+            <span>Fax</span>
+            <span>Status</span>
+          </div>
+          <div className="management-table__row management-table__row--filters">
+            {Array.from({ length: 5 }).map((_, index) => (
+              <span key={`contact-filter-${index}`}>🔍</span>
+            ))}
+          </div>
+          {contactRows.map((row) => (
+            <div key={row.email} className="management-table__row">
+              <span>{row.name}</span>
+              <span>{row.email}</span>
+              <span>{row.phone}</span>
+              <span>{row.fax}</span>
+              <span>{row.status}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function EquipmentPanel() {
+  return (
+    <div className="management-view">
+      <div className="management-view__header">
+        <div>
+          <h2>Equipment List</h2>
+          <p>Manage Equipment List</p>
+        </div>
+        <div className="management-view__logo">
+          <strong>Pro-Demo Hauling</strong>
+          <span>transportation</span>
+        </div>
+      </div>
+      <div className="management-card">
+        <div className="management-card__title">👥 Equipment</div>
+        <div className="management-card__toolbar">
+          <div />
+          <label className="management-card__search">
+            <span>🔍</span>
+            <input type="text" placeholder="Search" />
+          </label>
+        </div>
+        <div className="management-table">
+          <div className="management-table__row management-table__row--header">
+            <span>Unit Number</span>
+            <span>Unit Type</span>
+            <span>VIN</span>
+            <span>Status</span>
+          </div>
+          <div className="management-table__row management-table__row--filters">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <span key={`equipment-filter-${index}`}>🔍</span>
+            ))}
+          </div>
+          {equipmentRows.length ? (
+            equipmentRows.map((row) => (
+              <div key={row.vin} className="management-table__row">
+                <span>{row.unitNumber}</span>
+                <span>{row.unitType}</span>
+                <span>{row.vin}</span>
+                <span>{row.status}</span>
+              </div>
+            ))
+          ) : (
+            <div className="management-table__row management-table__row--empty">
+              <span>No data</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function PaymentPanel() {
+  return (
+    <div className="management-view">
+      <div className="management-card">
+        <div className="management-card__title">💳 Client Payment Methods</div>
+        <div className="payment-tabs">
+          <button className="payment-tabs__tab payment-tabs__tab--active" type="button">
+            Credit Card
+          </button>
+          <button className="payment-tabs__tab" type="button">
+            ACH
+          </button>
+        </div>
+        <div className="management-table management-table--payments">
+          <div className="management-table__row management-table__row--header">
+            <span>Credit Card</span>
+            <span>Is Default</span>
+            <span>Auto-Pay</span>
+            <span>Actions</span>
+          </div>
+          {paymentRows.map((row) => (
+            <div key={row.card} className="management-table__row">
+              <span>{row.card}</span>
+              <span>{row.isDefault}</span>
+              <span>{row.autopay}</span>
+              <span className="payment-actions">
+                <span>✅</span>
+                <span>🗑️</span>
+              </span>
+            </div>
+          ))}
+        </div>
+        <div className="management-card__footer payment-footer">
+          <button className="management-card__primary" type="button">
+            Save Changes
+          </button>
+          <div className="payment-links">
+            <p>
+              To Make a Payment with a new <a href="/">Credit Card Account</a>
+            </p>
+            <p>
+              To Make a Payment with a new <a href="/">ACH Account</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function DashboardPage() {
+  const [activeTab, setActiveTab] = useState<ManagementKey>('employee')
+
+  const managementContent = useMemo(() => {
+    switch (activeTab) {
+      case 'contact':
+        return <ContactPanel />
+      case 'equipment':
+        return <EquipmentPanel />
+      case 'payment':
+        return <PaymentPanel />
+      default:
+        return <EmployeePanel />
+    }
+  }, [activeTab])
+
   return (
     <AppShell>
       <div className="dashboard">
@@ -195,6 +519,28 @@ export function DashboardPage() {
               ))}
             </div>
           </article>
+        </section>
+
+        <section className="management">
+          <header className="management__header">
+            <div>
+              <h2>Dashboard Services</h2>
+              <p>Quick access to employee records, contacts, equipment, and payment methods.</p>
+            </div>
+            <div className="management__tabs">
+              {managementTabs.map((tab) => (
+                <button
+                  key={tab.key}
+                  className={`management__tab${activeTab === tab.key ? ' management__tab--active' : ''}`}
+                  type="button"
+                  onClick={() => setActiveTab(tab.key)}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </header>
+          <div className="management__content">{managementContent}</div>
         </section>
       </div>
     </AppShell>
