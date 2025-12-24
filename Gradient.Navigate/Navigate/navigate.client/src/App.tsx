@@ -1,8 +1,8 @@
 import './App.css'
-import { LoginPage } from './modules/auth/LoginPage'
+import { PreviewPage } from './modules/preview/PreviewPage'
 
 function App() {
-  return <LoginPage />
+  return <PreviewPage />
 }
 
 export default App
