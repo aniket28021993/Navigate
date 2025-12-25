@@ -88,18 +88,18 @@ export function EmployeePanel() {
           </div>
           {employeeRows.map((row) => (
             <div key={row.email} className="management-table__row">
-              <span>{row.lastName}</span>
-              <span>{row.firstName}</span>
-              <span>{row.phone}</span>
-              <span>{row.email}</span>
-              <span>{row.dob}</span>
-              <span>{row.hireDate}</span>
-              <span>{row.jobTitle}</span>
+              <span data-label="Last Name">{row.lastName}</span>
+              <span data-label="First Name">{row.firstName}</span>
+              <span data-label="Phone">{row.phone}</span>
+              <span data-label="Email">{row.email}</span>
+              <span data-label="Date Of Birth">{row.dob}</span>
+              <span data-label="Date Of Hire">{row.hireDate}</span>
+              <span data-label="Job Title">{row.jobTitle}</span>
               <span>
                 <div className="management-table__license">
-                  <span>{row.licenseNumber}</span>
-                  <span>{row.licenseState}</span>
-                  <span>{row.licenseClass}</span>
+                  <span data-label="License #">{row.licenseNumber}</span>
+                  <span data-label="State">{row.licenseState}</span>
+                  <span data-label="Class">{row.licenseClass}</span>
                 </div>
               </span>
             </div>

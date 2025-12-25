@@ -44,10 +44,10 @@ export function EquipmentPanel() {
           {equipmentRows.length ? (
             equipmentRows.map((row) => (
               <div key={row.vin} className="management-table__row">
-                <span>{row.unitNumber}</span>
-                <span>{row.unitType}</span>
-                <span>{row.vin}</span>
-                <span>{row.status}</span>
+                <span data-label="Unit Number">{row.unitNumber}</span>
+                <span data-label="Unit Type">{row.unitType}</span>
+                <span data-label="VIN">{row.vin}</span>
+                <span data-label="Status">{row.status}</span>
               </div>
             ))
           ) : (

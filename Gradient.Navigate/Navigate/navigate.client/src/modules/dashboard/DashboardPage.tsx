@@ -180,11 +180,14 @@ export function DashboardPage() {
                 </div>
                 {loads.map((load) => (
                   <div key={load.id} className="data-table__row">
-                    <span>{load.id}</span>
-                    <span>{load.client}</span>
-                    <span>{load.route}</span>
-                    <span>{load.eta}</span>
-                    <span className={`status-pill status-pill--${load.status.replace(' ', '').toLowerCase()}`}>
+                    <span data-label="Load">{load.id}</span>
+                    <span data-label="Client">{load.client}</span>
+                    <span data-label="Route">{load.route}</span>
+                    <span data-label="ETA">{load.eta}</span>
+                    <span
+                      data-label="Status"
+                      className={`status-pill status-pill--${load.status.replace(' ', '').toLowerCase()}`}
+                    >
                       {load.status}
                     </span>
                   </div>

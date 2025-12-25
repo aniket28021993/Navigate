@@ -48,10 +48,10 @@ export function PaymentPanel() {
           </div>
           {paymentRows.map((row) => (
             <div key={row.card} className="management-table__row">
-              <span>{row.card}</span>
-              <span>{row.isDefault}</span>
-              <span>{row.autopay}</span>
-              <span className="payment-actions">
+              <span data-label="Credit Card">{row.card}</span>
+              <span data-label="Is Default">{row.isDefault}</span>
+              <span data-label="Auto-Pay">{row.autopay}</span>
+              <span data-label="Actions" className="payment-actions">
                 <button
                   type="button"
                   className="payment-action"
