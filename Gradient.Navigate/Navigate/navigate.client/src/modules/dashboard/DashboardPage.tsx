@@ -103,6 +103,14 @@ type NavigationKey = (typeof navigationItems)[number]['key']
 
 export function DashboardPage() {
   const [activeModule, setActiveModule] = useState<NavigationKey>('dashboard')
+  const [feedback, setFeedback] = useState('')
+
+  const handleFeedback = (message: string) => {
+    setFeedback(message)
+    window.setTimeout(() => {
+      setFeedback((current) => (current === message ? '' : current))
+    }, 2000)
+  }
 
   const moduleContent = useMemo(() => {
     switch (activeModule) {
@@ -127,7 +135,13 @@ export function DashboardPage() {
         description: item.description,
       }))}
       activeNavigationKey={activeModule}
-      onNavigationSelect={(key) => setActiveModule(key as NavigationKey)}
+      onNavigationSelect={(key) => {
+        const nextKey = key as NavigationKey
+        setActiveModule(nextKey)
+        handleFeedback(`Opened ${navigationItems.find((item) => item.key === nextKey)?.label} workspace.`)
+      }}
+      actionMessage={feedback}
+      onHeaderAction={(action) => handleFeedback(`${action} action queued.`)}
     >
       {activeModule === 'dashboard' ? (
         <div className="dashboard">
@@ -148,7 +162,11 @@ export function DashboardPage() {
                   <h2>Active loads</h2>
                   <p>Latest dispatch milestones across today&apos;s shipments.</p>
                 </div>
-                <button className="data-card__action" type="button">
+                <button
+                  className="data-card__action"
+                  type="button"
+                  onClick={() => handleFeedback('Active loads view opened.')}
+                >
                   View all
                 </button>
               </header>
@@ -193,7 +211,11 @@ export function DashboardPage() {
                 ))}
               </div>
               <div className="data-card__footer">
-                <button className="data-card__action" type="button">
+                <button
+                  className="data-card__action"
+                  type="button"
+                  onClick={() => handleFeedback('Alert review queue opened.')}
+                >
                   Review alerts
                 </button>
               </div>

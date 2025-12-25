@@ -58,6 +58,24 @@
   min-height: 0;
 }
 
+.action-feedback {
+  margin: 0 2.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: #eef3ff;
+  color: #2b3b5f;
+  border: 1px solid #d3ddf1;
+  font-size: 0.95rem;
+}
+
+.action-feedback--inline {
+  margin: 0;
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  background: #edf2fb;
+  border-color: #dbe3f4;
+}
+
 .auth-page {
   min-height: 100vh;
   display: grid;
@@ -776,6 +794,13 @@
   display: inline-flex;
   gap: 0.5rem;
   align-items: center;
+}
+
+.payment-action {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 .payment-footer a {

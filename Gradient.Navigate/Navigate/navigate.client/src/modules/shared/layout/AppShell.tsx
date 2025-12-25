@@ -10,6 +10,8 @@ type AppShellProps = PropsWithChildren & {
   navigationLinks?: NavigationLink[]
   activeNavigationKey?: string
   onNavigationSelect?: (key: string) => void
+  actionMessage?: string
+  onHeaderAction?: (action: string) => void
 }
 
 export function AppShell({
@@ -17,6 +19,8 @@ export function AppShell({
   navigationLinks = [],
   activeNavigationKey,
   onNavigationSelect,
+  actionMessage,
+  onHeaderAction,
 }: AppShellProps) {
   return (
     <div className="app-shell">
@@ -51,14 +55,19 @@ export function AppShell({
             <p className="app-shell__subtitle">Today&apos;s fleet status and compliance checks.</p>
           </div>
           <div className="app-shell__header-actions">
-            <button className="app-shell__ghost" type="button">
+            <button className="app-shell__ghost" type="button" onClick={() => onHeaderAction?.('Create load')}>
               Create load
             </button>
-            <button className="app-shell__action" type="button">
+            <button className="app-shell__action" type="button" onClick={() => onHeaderAction?.('Secure session')}>
               Secure Session
             </button>
           </div>
         </header>
+        {actionMessage ? (
+          <div className="action-feedback" role="status">
+            {actionMessage}
+          </div>
+        ) : null}
         <main className="app-shell__main">{children}</main>
       </div>
     </div>

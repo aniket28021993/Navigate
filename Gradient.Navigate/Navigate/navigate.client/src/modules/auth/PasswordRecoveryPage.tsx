@@ -1,3 +1,5 @@
+import type { FormEvent } from 'react'
+import { useState } from 'react'
 import { AuthLayout } from './AuthLayout'
 
 interface PasswordRecoveryPageProps {
@@ -5,6 +7,15 @@ interface PasswordRecoveryPageProps {
 }
 
 export function PasswordRecoveryPage({ onBackToLogin }: PasswordRecoveryPageProps) {
+  const captchaOptions = ['dwwp9ury', 'v3x7k2m1', '8qz4t2r9']
+  const [captcha, setCaptcha] = useState(captchaOptions[0])
+  const [status, setStatus] = useState('')
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setStatus('Recovery request sent. Check your inbox for next steps.')
+  }
+
   return (
     <AuthLayout
       title="Password Recovery"
@@ -16,7 +27,7 @@ export function PasswordRecoveryPage({ onBackToLogin }: PasswordRecoveryPageProp
         </button>
       }
     >
-      <form className="auth-form">
+      <form className="auth-form" onSubmit={handleSubmit}>
         <label className="auth-field">
           <span className="auth-field__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
@@ -27,13 +38,26 @@ export function PasswordRecoveryPage({ onBackToLogin }: PasswordRecoveryPageProp
           <input type="text" name="username" placeholder="Enter your username" />
         </label>
         <div className="auth-captcha">
-          <div className="auth-captcha__image" aria-hidden="true">dwwp9ury</div>
-          <button type="button" className="auth-captcha__refresh">Refresh</button>
+          <div className="auth-captcha__image" aria-hidden="true">
+            {captcha}
+          </div>
+          <button
+            type="button"
+            className="auth-captcha__refresh"
+            onClick={() => {
+              const next = captchaOptions[(captchaOptions.indexOf(captcha) + 1) % captchaOptions.length]
+              setCaptcha(next)
+              setStatus('Captcha refreshed.')
+            }}
+          >
+            Refresh
+          </button>
           <label className="auth-captcha__input">
             <span>Input symbols</span>
             <input type="text" name="captcha" placeholder="Enter symbols" />
           </label>
         </div>
+        {status ? <div className="action-feedback action-feedback--inline">{status}</div> : null}
         <button type="submit" className="auth-button auth-button--primary">
           Submit
         </button>
