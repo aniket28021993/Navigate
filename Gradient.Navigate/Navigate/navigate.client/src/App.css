@@ -297,6 +297,20 @@
   gap: 0.75rem;
 }
 
+.app-shell__nav-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.app-shell__nav-title {
+  margin: 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94a1ba;
+}
+
 .app-shell__nav-item {
   text-align: left;
   border: 1px solid transparent;
