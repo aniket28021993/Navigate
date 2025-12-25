@@ -55,11 +55,11 @@ export function ContactPanel() {
           </div>
           {contactRows.map((row) => (
             <div key={row.email} className="management-table__row">
-              <span>{row.name}</span>
-              <span>{row.email}</span>
-              <span>{row.phone}</span>
-              <span>{row.fax}</span>
-              <span>{row.status}</span>
+              <span data-label="Name">{row.name}</span>
+              <span data-label="Email">{row.email}</span>
+              <span data-label="Phone">{row.phone}</span>
+              <span data-label="Fax">{row.fax}</span>
+              <span data-label="Status">{row.status}</span>
             </div>
           ))}
         </div>
