@@ -1,34 +1,22 @@
 import type { PropsWithChildren } from 'react'
 
-type SidebarLink = {
+type NavigationLink = {
   key: string
   label: string
   description?: string
 }
 
 type AppShellProps = PropsWithChildren & {
-  sidebarLinks?: SidebarLink[]
-  activeSidebarKey?: string
-  sidebarLabel?: string
-  onSidebarSelect?: (key: string) => void
+  navigationLinks?: NavigationLink[]
+  activeNavigationKey?: string
+  onNavigationSelect?: (key: string) => void
 }
-
-const navigation = [
-  { label: 'Dashboard', description: 'Overview', active: true },
-  { label: 'Clients', description: 'Profiles & contracts' },
-  { label: 'Loads', description: 'Shipping workflows' },
-  { label: 'Dispatch', description: 'Assignments' },
-  { label: 'Billing', description: 'Invoices' },
-  { label: 'Analytics', description: 'KPIs' },
-  { label: 'Settings', description: 'Preferences' },
-]
 
 export function AppShell({
   children,
-  sidebarLinks = [],
-  activeSidebarKey,
-  sidebarLabel,
-  onSidebarSelect,
+  navigationLinks = [],
+  activeNavigationKey,
+  onNavigationSelect,
 }: AppShellProps) {
   return (
     <div className="app-shell">
@@ -38,35 +26,18 @@ export function AppShell({
           <span>Operations Suite</span>
         </div>
         <nav className="app-shell__nav">
-          {navigation.map((item) => (
+          {navigationLinks.map((item) => (
             <button
-              key={item.label}
-              className={`app-shell__nav-item${item.active ? ' app-shell__nav-item--active' : ''}`}
+              key={item.key}
+              className={`app-shell__nav-item${activeNavigationKey === item.key ? ' app-shell__nav-item--active' : ''}`}
               type="button"
+              onClick={() => onNavigationSelect?.(item.key)}
             >
               <span>{item.label}</span>
-              <small>{item.description}</small>
+              {item.description ? <small>{item.description}</small> : null}
             </button>
           ))}
         </nav>
-        {sidebarLinks.length > 0 ? (
-          <div className="app-shell__nav-section">
-            <p className="app-shell__nav-title">{sidebarLabel ?? 'Dashboard Services'}</p>
-            <nav className="app-shell__nav">
-              {sidebarLinks.map((item) => (
-                <button
-                  key={item.key}
-                  className={`app-shell__nav-item${activeSidebarKey === item.key ? ' app-shell__nav-item--active' : ''}`}
-                  type="button"
-                  onClick={() => onSidebarSelect?.(item.key)}
-                >
-                  <span>{item.label}</span>
-                  {item.description ? <small>{item.description}</small> : null}
-                </button>
-              ))}
-            </nav>
-          </div>
-        ) : null}
         <div className="app-shell__footer">
           <p>Active region</p>
           <strong>Southwest Hub</strong>
