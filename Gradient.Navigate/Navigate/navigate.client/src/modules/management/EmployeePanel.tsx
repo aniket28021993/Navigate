@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 const employeeRows = [
   {
     lastName: 'Driver',
@@ -14,6 +16,8 @@ const employeeRows = [
 ]
 
 export function EmployeePanel() {
+  const [status, setStatus] = useState('')
+
   return (
     <div className="management-view">
       <div className="management-view__header">
@@ -30,10 +34,10 @@ export function EmployeePanel() {
         <div className="management-card__title">👥 Employees</div>
         <div className="management-card__toolbar">
           <div className="management-card__actions">
-            <button type="button" aria-label="Export">
+            <button type="button" aria-label="Export" onClick={() => setStatus('Employee list exported.')}>
               ⤓
             </button>
-            <button type="button" aria-label="Copy">
+            <button type="button" aria-label="Copy" onClick={() => setStatus('Employee roster copied to clipboard.')}>
               ⧉
             </button>
           </div>
@@ -42,6 +46,7 @@ export function EmployeePanel() {
             <input type="text" placeholder="Search" />
           </label>
         </div>
+        {status ? <div className="action-feedback action-feedback--inline">{status}</div> : null}
         <div className="management-table">
           <div className="management-table__row management-table__row--header">
             <span>Last Name</span>
@@ -101,7 +106,7 @@ export function EmployeePanel() {
           ))}
         </div>
         <div className="management-card__footer">
-          <button className="management-card__primary" type="button">
+          <button className="management-card__primary" type="button" onClick={() => setStatus('Roster download prepared.')}>
             ⬇ Download Roster
           </button>
         </div>

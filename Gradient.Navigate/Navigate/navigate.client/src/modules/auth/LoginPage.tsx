@@ -1,4 +1,5 @@
 import type { FormEvent } from 'react'
+import { useState } from 'react'
 import { AuthLayout } from './AuthLayout'
 
 interface LoginPageProps {
@@ -8,9 +9,14 @@ interface LoginPageProps {
 }
 
 export function LoginPage({ onLogin, onNavigateRecovery, onNavigateRegistration }: LoginPageProps) {
+  const [status, setStatus] = useState('')
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    onLogin()
+    setStatus('Signing you in with demo credentials.')
+    window.setTimeout(() => {
+      onLogin()
+    }, 400)
   }
 
   return (
@@ -41,13 +47,17 @@ export function LoginPage({ onLogin, onNavigateRecovery, onNavigateRegistration 
             href="#password-recovery"
             onClick={(event) => {
               event.preventDefault()
+              setStatus('Redirecting to password recovery.')
               onNavigateRecovery()
             }}
           >
             Password Recovery
           </a>
         </div>
-        <button type="submit" className="auth-button auth-button--primary">Login</button>
+        {status ? <div className="action-feedback action-feedback--inline">{status}</div> : null}
+        <button type="submit" className="auth-button auth-button--primary">
+          Login
+        </button>
         <div className="auth-links auth-links--secondary">
           <span>New account?</span>
           <a
@@ -55,6 +65,7 @@ export function LoginPage({ onLogin, onNavigateRecovery, onNavigateRegistration 
             href="#account-registration"
             onClick={(event) => {
               event.preventDefault()
+              setStatus('Opening registration form.')
               onNavigateRegistration()
             }}
           >
