@@ -1003,6 +1003,51 @@
   .app-shell__nav-item {
     min-width: 160px;
   }
+
+  .management-table {
+    padding: 0.75rem 1rem 1.25rem;
+  }
+
+  .management-table__row {
+    grid-template-columns: 1fr;
+    min-width: 0;
+    gap: 0.5rem;
+    padding: 0.85rem;
+    border: 1px solid #eef1f7;
+    border-radius: 12px;
+    background: #ffffff;
+  }
+
+  .management-table__row--header,
+  .management-table__row--filters {
+    display: none;
+  }
+
+  .management-table__row span {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .management-table__row span::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #5b6a82;
+  }
+
+  .payment-tabs {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .payment-tabs__tab {
+    flex: 1 1 140px;
+    text-align: center;
+  }
+
+  .payment-actions {
+    justify-content: flex-end;
+  }
 }
 
 @media (max-width: 600px) {
