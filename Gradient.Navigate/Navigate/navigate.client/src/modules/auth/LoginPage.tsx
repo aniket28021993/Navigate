@@ -6,9 +6,10 @@ interface LoginPageProps {
   onLogin: () => void
   onNavigateRecovery: () => void
   onNavigateRegistration: () => void
+  onNavigateGuestPayment: () => void
 }
 
-export function LoginPage({ onLogin, onNavigateRecovery, onNavigateRegistration }: LoginPageProps) {
+export function LoginPage({ onLogin, onNavigateRecovery, onNavigateRegistration, onNavigateGuestPayment }: LoginPageProps) {
   const [status, setStatus] = useState('')
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -58,6 +59,20 @@ export function LoginPage({ onLogin, onNavigateRecovery, onNavigateRegistration 
         <button type="submit" className="auth-button auth-button--primary">
           Login
         </button>
+        <div className="auth-links auth-links--secondary">
+          <span>Need to pay an invoice?</span>
+          <a
+            className="auth-link"
+            href="#guest-payment"
+            onClick={(event) => {
+              event.preventDefault()
+              setStatus('Opening guest payment form.')
+              onNavigateGuestPayment()
+            }}
+          >
+            Make a guest payment
+          </a>
+        </div>
         <div className="auth-links auth-links--secondary">
           <span>New account?</span>
           <a
