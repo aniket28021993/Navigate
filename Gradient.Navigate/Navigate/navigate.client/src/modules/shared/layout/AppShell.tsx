@@ -1,5 +1,18 @@
 import type { PropsWithChildren } from 'react'
 
+type SidebarLink = {
+  key: string
+  label: string
+  description?: string
+}
+
+type AppShellProps = PropsWithChildren & {
+  sidebarLinks?: SidebarLink[]
+  activeSidebarKey?: string
+  sidebarLabel?: string
+  onSidebarSelect?: (key: string) => void
+}
+
 const navigation = [
   { label: 'Dashboard', description: 'Overview', active: true },
   { label: 'Clients', description: 'Profiles & contracts' },
@@ -10,7 +23,13 @@ const navigation = [
   { label: 'Settings', description: 'Preferences' },
 ]
 
-export function AppShell({ children }: PropsWithChildren) {
+export function AppShell({
+  children,
+  sidebarLinks = [],
+  activeSidebarKey,
+  sidebarLabel,
+  onSidebarSelect,
+}: AppShellProps) {
   return (
     <div className="app-shell">
       <aside className="app-shell__sidebar">
@@ -30,6 +49,24 @@ export function AppShell({ children }: PropsWithChildren) {
             </button>
           ))}
         </nav>
+        {sidebarLinks.length > 0 ? (
+          <div className="app-shell__nav-section">
+            <p className="app-shell__nav-title">{sidebarLabel ?? 'Dashboard Services'}</p>
+            <nav className="app-shell__nav">
+              {sidebarLinks.map((item) => (
+                <button
+                  key={item.key}
+                  className={`app-shell__nav-item${activeSidebarKey === item.key ? ' app-shell__nav-item--active' : ''}`}
+                  type="button"
+                  onClick={() => onSidebarSelect?.(item.key)}
+                >
+                  <span>{item.label}</span>
+                  {item.description ? <small>{item.description}</small> : null}
+                </button>
+              ))}
+            </nav>
+          </div>
+        ) : null}
         <div className="app-shell__footer">
           <p>Active region</p>
           <strong>Southwest Hub</strong>

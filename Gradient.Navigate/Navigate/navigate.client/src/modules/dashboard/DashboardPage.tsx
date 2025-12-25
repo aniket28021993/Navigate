@@ -117,7 +117,15 @@ export function DashboardPage() {
   }, [activeTab])
 
   return (
-    <AppShell>
+    <AppShell
+      sidebarLinks={managementTabs.map((tab) => ({
+        key: tab.key,
+        label: tab.label,
+      }))}
+      activeSidebarKey={activeTab}
+      sidebarLabel="Dashboard Services"
+      onSidebarSelect={(key) => setActiveTab(key as ManagementKey)}
+    >
       <div className="dashboard">
         <section className="dashboard__stats">
           {stats.map((item) => (
@@ -231,18 +239,6 @@ export function DashboardPage() {
             <div>
               <h2>Dashboard Services</h2>
               <p>Quick access to employee records, contacts, equipment, and payment methods.</p>
-            </div>
-            <div className="management__tabs">
-              {managementTabs.map((tab) => (
-                <button
-                  key={tab.key}
-                  className={`management__tab${activeTab === tab.key ? ' management__tab--active' : ''}`}
-                  type="button"
-                  onClick={() => setActiveTab(tab.key)}
-                >
-                  {tab.label}
-                </button>
-              ))}
             </div>
           </header>
           <div className="management__content">{managementContent}</div>
