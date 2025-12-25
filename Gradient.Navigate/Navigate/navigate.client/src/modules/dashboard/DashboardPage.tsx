@@ -91,20 +91,23 @@ const tasks = [
   },
 ]
 
-const managementTabs = [
-  { key: 'employee', label: 'Employee' },
-  { key: 'contact', label: 'Contact' },
-  { key: 'equipment', label: 'Equipment' },
-  { key: 'payment', label: 'Payment Method' },
+const navigationItems = [
+  { key: 'dashboard', label: 'Dashboard', description: 'Overview' },
+  { key: 'employee', label: 'Employee', description: 'People records' },
+  { key: 'contact', label: 'Contact', description: 'Client directory' },
+  { key: 'equipment', label: 'Equipment', description: 'Fleet assets' },
+  { key: 'payment', label: 'Payment Method', description: 'Billing setup' },
 ] as const
 
-type ManagementKey = (typeof managementTabs)[number]['key']
+type NavigationKey = (typeof navigationItems)[number]['key']
 
 export function DashboardPage() {
-  const [activeTab, setActiveTab] = useState<ManagementKey>('employee')
+  const [activeModule, setActiveModule] = useState<NavigationKey>('dashboard')
 
-  const managementContent = useMemo(() => {
-    switch (activeTab) {
+  const moduleContent = useMemo(() => {
+    switch (activeModule) {
+      case 'employee':
+        return <EmployeePanel />
       case 'contact':
         return <ContactPanel />
       case 'equipment':
@@ -112,138 +115,132 @@ export function DashboardPage() {
       case 'payment':
         return <PaymentPanel />
       default:
-        return <EmployeePanel />
+        return null
     }
-  }, [activeTab])
+  }, [activeModule])
 
   return (
     <AppShell
-      sidebarLinks={managementTabs.map((tab) => ({
-        key: tab.key,
-        label: tab.label,
+      navigationLinks={navigationItems.map((item) => ({
+        key: item.key,
+        label: item.label,
+        description: item.description,
       }))}
-      activeSidebarKey={activeTab}
-      sidebarLabel="Dashboard Services"
-      onSidebarSelect={(key) => setActiveTab(key as ManagementKey)}
+      activeNavigationKey={activeModule}
+      onNavigationSelect={(key) => setActiveModule(key as NavigationKey)}
     >
-      <div className="dashboard">
-        <section className="dashboard__stats">
-          {stats.map((item) => (
-            <article key={item.label} className="stat-card">
-              <p className="stat-card__label">{item.label}</p>
-              <h3>{item.value}</h3>
-              <span className="stat-card__trend">{item.trend}</span>
+      {activeModule === 'dashboard' ? (
+        <div className="dashboard">
+          <section className="dashboard__stats">
+            {stats.map((item) => (
+              <article key={item.label} className="stat-card">
+                <p className="stat-card__label">{item.label}</p>
+                <h3>{item.value}</h3>
+                <span className="stat-card__trend">{item.trend}</span>
+              </article>
+            ))}
+          </section>
+
+          <section className="dashboard__grid">
+            <article className="data-card">
+              <header className="data-card__header">
+                <div>
+                  <h2>Active loads</h2>
+                  <p>Latest dispatch milestones across today&apos;s shipments.</p>
+                </div>
+                <button className="data-card__action" type="button">
+                  View all
+                </button>
+              </header>
+              <div className="data-table">
+                <div className="data-table__row data-table__row--header">
+                  <span>Load</span>
+                  <span>Client</span>
+                  <span>Route</span>
+                  <span>ETA</span>
+                  <span>Status</span>
+                </div>
+                {loads.map((load) => (
+                  <div key={load.id} className="data-table__row">
+                    <span>{load.id}</span>
+                    <span>{load.client}</span>
+                    <span>{load.route}</span>
+                    <span>{load.eta}</span>
+                    <span className={`status-pill status-pill--${load.status.replace(' ', '').toLowerCase()}`}>
+                      {load.status}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </article>
-          ))}
-        </section>
 
-        <section className="dashboard__grid">
-          <article className="data-card">
-            <header className="data-card__header">
-              <div>
-                <h2>Active loads</h2>
-                <p>Latest dispatch milestones across today&apos;s shipments.</p>
-              </div>
-              <button className="data-card__action" type="button">
-                View all
-              </button>
-            </header>
-            <div className="data-table">
-              <div className="data-table__row data-table__row--header">
-                <span>Load</span>
-                <span>Client</span>
-                <span>Route</span>
-                <span>ETA</span>
-                <span>Status</span>
-              </div>
-              {loads.map((load) => (
-                <div key={load.id} className="data-table__row">
-                  <span>{load.id}</span>
-                  <span>{load.client}</span>
-                  <span>{load.route}</span>
-                  <span>{load.eta}</span>
-                  <span className={`status-pill status-pill--${load.status.replace(' ', '').toLowerCase()}`}>
-                    {load.status}
-                  </span>
+            <article className="data-card">
+              <header className="data-card__header">
+                <div>
+                  <h2>Today&apos;s activity</h2>
+                  <p>Live operational updates from the field.</p>
                 </div>
-              ))}
-            </div>
-          </article>
-
-          <article className="data-card">
-            <header className="data-card__header">
-              <div>
-                <h2>Today&apos;s activity</h2>
-                <p>Live operational updates from the field.</p>
-              </div>
-            </header>
-            <div className="activity-list">
-              {activity.map((item) => (
-                <div key={item.title} className="activity-item">
-                  <span className="activity-item__time">{item.time}</span>
-                  <div>
-                    <p className="activity-item__title">{item.title}</p>
-                    <p className="activity-item__detail">{item.detail}</p>
+              </header>
+              <div className="activity-list">
+                {activity.map((item) => (
+                  <div key={item.title} className="activity-item">
+                    <span className="activity-item__time">{item.time}</span>
+                    <div>
+                      <p className="activity-item__title">{item.title}</p>
+                      <p className="activity-item__detail">{item.detail}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-            <div className="data-card__footer">
-              <button className="data-card__action" type="button">
-                Review alerts
-              </button>
-            </div>
-          </article>
-        </section>
+                ))}
+              </div>
+              <div className="data-card__footer">
+                <button className="data-card__action" type="button">
+                  Review alerts
+                </button>
+              </div>
+            </article>
+          </section>
 
-        <section className="dashboard__grid dashboard__grid--secondary">
-          <article className="data-card">
-            <header className="data-card__header">
-              <div>
-                <h2>Module coverage</h2>
-                <p>Architecture blocks prepared for API integration.</p>
+          <section className="dashboard__grid dashboard__grid--secondary">
+            <article className="data-card">
+              <header className="data-card__header">
+                <div>
+                  <h2>Module coverage</h2>
+                  <p>Architecture blocks prepared for API integration.</p>
+                </div>
+              </header>
+              <div className="module-grid">
+                {modules.map((module) => (
+                  <article key={module.name} className="module-card">
+                    <h3>{module.name}</h3>
+                    <p>{module.description}</p>
+                  </article>
+                ))}
               </div>
-            </header>
-            <div className="module-grid">
-              {modules.map((module) => (
-                <article key={module.name} className="module-card">
-                  <h3>{module.name}</h3>
-                  <p>{module.description}</p>
-                </article>
-              ))}
-            </div>
-          </article>
-          <article className="data-card">
-            <header className="data-card__header">
-              <div>
-                <h2>Priority tasks</h2>
-                <p>Next actions for your team.</p>
-              </div>
-            </header>
-            <div className="task-list">
-              {tasks.map((task) => (
-                <div key={task.title} className="task-item">
-                  <div>
-                    <p className="task-item__title">{task.title}</p>
-                    <p className="task-item__owner">{task.owner}</p>
+            </article>
+            <article className="data-card">
+              <header className="data-card__header">
+                <div>
+                  <h2>Priority tasks</h2>
+                  <p>Next actions for your team.</p>
+                </div>
+              </header>
+              <div className="task-list">
+                {tasks.map((task) => (
+                  <div key={task.title} className="task-item">
+                    <div>
+                      <p className="task-item__title">{task.title}</p>
+                      <p className="task-item__owner">{task.owner}</p>
+                    </div>
+                    <span className="task-item__due">{task.due}</span>
                   </div>
-                  <span className="task-item__due">{task.due}</span>
-                </div>
-              ))}
-            </div>
-          </article>
-        </section>
-
-        <section className="management">
-          <header className="management__header">
-            <div>
-              <h2>Dashboard Services</h2>
-              <p>Quick access to employee records, contacts, equipment, and payment methods.</p>
-            </div>
-          </header>
-          <div className="management__content">{managementContent}</div>
-        </section>
-      </div>
+                ))}
+              </div>
+            </article>
+          </section>
+        </div>
+      ) : (
+        moduleContent
+      )}
     </AppShell>
   )
 }
