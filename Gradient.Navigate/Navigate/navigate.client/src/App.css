@@ -1035,6 +1035,12 @@
     color: #5b6a82;
   }
 
+  .management-table--contacts .management-table__row,
+  .management-table--payments .management-table__row {
+    grid-template-columns: 1fr;
+    min-width: 0;
+  }
+
   .payment-tabs {
     flex-wrap: wrap;
     gap: 0.75rem;
@@ -1142,6 +1148,12 @@
     min-width: 0;
   }
 
+  .management-table--contacts .management-table__row,
+  .management-table--payments .management-table__row {
+    grid-template-columns: 1fr;
+    min-width: 0;
+  }
+
   .management-table__row--header,
   .management-table__row--subheader,
   .management-table__row--filters {
@@ -1182,6 +1194,14 @@
 
   .management-card__search {
     min-width: 100%;
+  }
+
+  .management-card__title {
+    padding: 0.65rem 1rem;
+  }
+
+  .management-card__toolbar {
+    padding: 1rem 1rem 0.5rem;
   }
 
   .dashboard__stats {
