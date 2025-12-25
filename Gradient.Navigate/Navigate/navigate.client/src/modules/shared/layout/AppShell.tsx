@@ -49,6 +49,30 @@ export function AppShell({
         </div>
       </aside>
       <div className="app-shell__content">
+        <div className="app-shell__mobile-header">
+          <div>
+            <p className="app-shell__mobile-title">NaviGATE</p>
+            <span className="app-shell__mobile-subtitle">Fleet pulse &amp; quick actions</span>
+          </div>
+          <button className="app-shell__mobile-action" type="button" onClick={() => onHeaderAction?.('Create load')}>
+            Create load
+          </button>
+        </div>
+        {navigationLinks.length ? (
+          <nav className="app-shell__mobile-nav">
+            {navigationLinks.map((item) => (
+              <button
+                key={item.key}
+                className={`app-shell__mobile-link${activeNavigationKey === item.key ? ' app-shell__mobile-link--active' : ''}`}
+                type="button"
+                onClick={() => onNavigationSelect?.(item.key)}
+              >
+                <span>{item.label}</span>
+                {item.description ? <small>{item.description}</small> : null}
+              </button>
+            ))}
+          </nav>
+        ) : null}
         <header className="app-shell__header">
           <div>
             <p className="app-shell__title">Welcome back, Harmony</p>
