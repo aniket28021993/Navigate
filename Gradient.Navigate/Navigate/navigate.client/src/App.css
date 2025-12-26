@@ -873,9 +873,15 @@
   border: 1px solid #d4dbe7;
   background: #ffffff;
   border-radius: 8px;
-  padding: 0.35rem 0.75rem;
+  padding: 0.3rem 0.45rem;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.management-table__actions {
+  display: flex;
+  justify-content: center;
 }
 
 .management-card--details {
