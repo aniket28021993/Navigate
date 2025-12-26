@@ -1,4 +1,6 @@
 import { useMemo, useState } from 'react'
+import { AppShell } from '../shared/layout/AppShell'
+import { navigationItems } from '../shared/layout/navigationItems'
 import { employeeRows } from './employeeData'
 
 const parseEmployeeId = () => {
@@ -12,6 +14,7 @@ const parseEmployeeId = () => {
 export function EmployeeProfilePage() {
   const [activeTab, setActiveTab] = useState<'general' | 'documents' | 'emergency'>('general')
   const [status, setStatus] = useState('')
+  const [shellMessage, setShellMessage] = useState('')
   const employeeId = useMemo(parseEmployeeId, [])
   const selectedEmployee = useMemo(
     () => employeeRows.find((employee) => employee.id === employeeId) ?? null,
@@ -46,23 +49,19 @@ export function EmployeeProfilePage() {
     }
   }
 
-  if (!selectedEmployee) {
-    return (
-      <div className="management-view">
-        <div className="management-card">
-          <div className="management-card__title">👤 Employee Profile</div>
-          <p style={{ padding: '1.5rem' }}>We could not find that employee profile.</p>
-          <div className="management-card__footer">
-            <button className="management-card__primary" type="button" onClick={handleReturnToList}>
-              Back to list
-            </button>
-          </div>
+  const shellContent = !selectedEmployee ? (
+    <div className="management-view">
+      <div className="management-card">
+        <div className="management-card__title">👤 Employee Profile</div>
+        <p style={{ padding: '1.5rem' }}>We could not find that employee profile.</p>
+        <div className="management-card__footer">
+          <button className="management-card__primary" type="button" onClick={handleReturnToList}>
+            Back to list
+          </button>
         </div>
       </div>
-    )
-  }
-
-  return (
+    </div>
+  ) : (
     <div className="management-view">
       <div className="management-card management-card--details">
         <div className="management-card__title">
@@ -191,5 +190,17 @@ export function EmployeeProfilePage() {
         </div>
       </div>
     </div>
+  )
+
+  return (
+    <AppShell
+      navigationLinks={navigationItems}
+      activeNavigationKey="employee"
+      onNavigationSelect={(key) => setShellMessage(`Navigated to ${key} workspace.`)}
+      actionMessage={shellMessage}
+      onHeaderAction={(action) => setShellMessage(`${action} action queued.`)}
+    >
+      {shellContent}
+    </AppShell>
   )
 }
