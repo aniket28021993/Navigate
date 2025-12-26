@@ -806,6 +806,14 @@
   font-size: 0.85rem;
 }
 
+.management-table__row--filters input {
+  width: 100%;
+  border: 1px solid #dfe4ef;
+  border-radius: 8px;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.85rem;
+}
+
 .management-table__row--empty {
   justify-content: center;
   text-align: center;
@@ -834,6 +842,136 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.management-card__columns {
+  padding: 0 1.25rem 0.75rem;
+}
+
+.management-card__columns-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1f2559;
+  margin-bottom: 0.5rem;
+}
+
+.management-card__columns-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.5rem 1rem;
+}
+
+.management-card__columns-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #3f4a5f;
+}
+
+.management-table__actions button {
+  border: 1px solid #d4dbe7;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.management-card--details {
+  margin-top: 1.5rem;
+}
+
+.employee-tabs {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem 0;
+}
+
+.employee-tabs__tab {
+  border: 1px solid #d4dbe7;
+  background: #f7f9fc;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+}
+
+.employee-tabs__tab--active {
+  background: #1f2559;
+  color: #ffffff;
+  border-color: transparent;
+}
+
+.employee-details {
+  padding: 1.25rem;
+  border-top: 1px solid #dfe4ef;
+}
+
+.employee-details__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem 1.5rem;
+}
+
+.employee-details__label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #8b96aa;
+  margin-bottom: 0.35rem;
+}
+
+.employee-details__documents-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.employee-details__documents-header p {
+  margin: 0.35rem 0 0;
+  color: #5b6a82;
+}
+
+.employee-details__documents-header button {
+  border: 1px solid #1f2559;
+  background: #1f2559;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 0.45rem 0.9rem;
+  cursor: pointer;
+}
+
+.employee-details__documents-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.employee-details__document {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid #dfe4ef;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+}
+
+.employee-details__document span {
+  display: block;
+  color: #5b6a82;
+  font-size: 0.85rem;
+}
+
+.employee-details__document button {
+  border: 1px solid #d4dbe7;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
 }
 
 .management-card__primary {
