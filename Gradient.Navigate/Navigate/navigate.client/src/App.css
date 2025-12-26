@@ -613,6 +613,11 @@
   color: #5b6a82;
 }
 
+.management-card .table-pagination {
+  padding: 0.75rem 1.5rem 1.5rem;
+  border-top: 1px solid #eef1f7;
+}
+
 .table-pagination__controls {
   display: flex;
   align-items: center;
