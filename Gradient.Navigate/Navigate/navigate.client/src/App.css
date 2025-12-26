@@ -910,6 +910,15 @@
   min-width: 760px;
 }
 
+.management-table--equipment .management-table__row {
+  grid-template-columns:
+    minmax(140px, 1fr)
+    minmax(140px, 1fr)
+    minmax(220px, 2fr)
+    minmax(120px, 1fr);
+  min-width: 680px;
+}
+
 .management-table--payments .management-table__row {
   grid-template-columns: minmax(180px, 1.2fr) repeat(3, minmax(120px, 1fr));
   min-width: 720px;
