@@ -45,7 +45,7 @@ export function LoginPage({ onLogin, onNavigateRecovery, onNavigateRegistration,
           <span>Forgot your password?</span>
           <a
             className="auth-link"
-            href="#password-recovery"
+            href="#recovery"
             onClick={(event) => {
               event.preventDefault()
               setStatus('Redirecting to password recovery.')
@@ -77,7 +77,7 @@ export function LoginPage({ onLogin, onNavigateRecovery, onNavigateRegistration,
           <span>New account?</span>
           <a
             className="auth-link"
-            href="#account-registration"
+            href="#registration"
             onClick={(event) => {
               event.preventDefault()
               setStatus('Opening registration form.')

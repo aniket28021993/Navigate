@@ -43,9 +43,8 @@ export function EmployeeProfilePage() {
   }
 
   const handleReturnToList = () => {
-    window.close()
-    if (window.location.hash) {
-      window.location.assign(window.location.href.replace(window.location.hash, ''))
+    if (window.location.hash !== '#dashboard') {
+      window.location.hash = '#dashboard'
     }
   }
 
