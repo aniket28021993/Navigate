@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react'
+import { TablePagination } from '../shared/components/TablePagination'
+
 const contactRows = [
   {
     name: 'rahultoday',
@@ -23,6 +26,18 @@ const contactRows = [
 ]
 
 export function ContactPanel() {
+  const [currentPage, setCurrentPage] = useState(1)
+  const pageSize = 6
+  const totalPages = Math.max(1, Math.ceil(contactRows.length / pageSize))
+  const startIndex = (currentPage - 1) * pageSize
+  const paginatedRows = contactRows.slice(startIndex, startIndex + pageSize)
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages)
+    }
+  }, [currentPage, totalPages])
+
   return (
     <div className="management-view">
       <div className="management-view__header">
@@ -53,7 +68,7 @@ export function ContactPanel() {
               <span key={`contact-filter-${index}`}>🔍</span>
             ))}
           </div>
-          {contactRows.map((row) => (
+          {paginatedRows.map((row) => (
             <div key={row.email} className="management-table__row">
               <span data-label="Name">{row.name}</span>
               <span data-label="Email">{row.email}</span>
@@ -63,6 +78,13 @@ export function ContactPanel() {
             </div>
           ))}
         </div>
+        <TablePagination
+          currentPage={currentPage}
+          totalItems={contactRows.length}
+          pageSize={pageSize}
+          onPageChange={setCurrentPage}
+          itemLabel="contacts"
+        />
       </div>
     </div>
   )

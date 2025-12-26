@@ -7,6 +7,7 @@ import { ContactPanel } from '../management/ContactPanel'
 import { EmployeePanel } from '../management/EmployeePanel'
 import { EquipmentPanel } from '../management/EquipmentPanel'
 import { PaymentPanel } from '../management/PaymentPanel'
+import { TablePagination } from '../shared/components/TablePagination'
 
 const stats = [
   { label: 'Loads in transit', value: '128', trend: '+12% vs last week' },
@@ -99,7 +100,14 @@ export function DashboardPage() {
   const { section } = useParams<{ section?: string }>()
   const [activeModule, setActiveModule] = useState<NavigationKey>('dashboard')
   const [feedback, setFeedback] = useState('')
+  const [loadsPage, setLoadsPage] = useState(1)
   const validKeys = useMemo(() => new Set(navigationItems.map((item) => item.key)), [])
+  const loadsPageSize = 4
+  const loadsTotalPages = Math.max(1, Math.ceil(loads.length / loadsPageSize))
+  const paginatedLoads = useMemo(() => {
+    const startIndex = (loadsPage - 1) * loadsPageSize
+    return loads.slice(startIndex, startIndex + loadsPageSize)
+  }, [loadsPage, loadsPageSize])
 
   useEffect(() => {
     if (!section) {
@@ -112,6 +120,12 @@ export function DashboardPage() {
     }
     setActiveModule(section as NavigationKey)
   }, [navigate, section, validKeys])
+
+  useEffect(() => {
+    if (loadsPage > loadsTotalPages) {
+      setLoadsPage(loadsTotalPages)
+    }
+  }, [loadsPage, loadsTotalPages])
 
   const handleFeedback = (message: string) => {
     setFeedback(message)
@@ -186,7 +200,7 @@ export function DashboardPage() {
                   <span>ETA</span>
                   <span>Status</span>
                 </div>
-                {loads.map((load) => (
+                {paginatedLoads.map((load) => (
                   <div key={load.id} className="data-table__row">
                     <span data-label="Load">{load.id}</span>
                     <span data-label="Client">{load.client}</span>
@@ -201,6 +215,13 @@ export function DashboardPage() {
                   </div>
                 ))}
               </div>
+              <TablePagination
+                currentPage={loadsPage}
+                totalItems={loads.length}
+                pageSize={loadsPageSize}
+                onPageChange={setLoadsPage}
+                itemLabel="loads"
+              />
             </article>
 
             <article className="data-card">
