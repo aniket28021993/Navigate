@@ -7,6 +7,8 @@ import { ContactPanel } from '../management/ContactPanel'
 import { EmployeePanel } from '../management/EmployeePanel'
 import { EquipmentPanel } from '../management/EquipmentPanel'
 import { PaymentPanel } from '../management/PaymentPanel'
+import { CompanySettingsPanel } from '../settings/CompanySettingsPanel'
+import { UserSettingsPanel } from '../settings/UserSettingsPanel'
 import { TablePagination } from '../shared/components/TablePagination'
 
 const stats = [
@@ -144,6 +146,10 @@ export function DashboardPage() {
         return <EquipmentPanel />
       case 'payment':
         return <PaymentPanel />
+      case 'company-settings':
+        return <CompanySettingsPanel />
+      case 'user-settings':
+        return <UserSettingsPanel />
       default:
         return null
     }
