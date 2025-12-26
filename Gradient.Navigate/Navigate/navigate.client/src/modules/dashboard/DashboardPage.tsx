@@ -1,5 +1,6 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { AppShell } from '../shared/layout/AppShell'
+import { NavigationKey, navigationItems } from '../shared/layout/navigationItems'
 import { ContactPanel } from '../management/ContactPanel'
 import { EmployeePanel } from '../management/EmployeePanel'
 import { EquipmentPanel } from '../management/EquipmentPanel'
@@ -91,19 +92,18 @@ const tasks = [
   },
 ]
 
-const navigationItems = [
-  { key: 'dashboard', label: 'Dashboard', description: 'Overview' },
-  { key: 'employee', label: 'Employee', description: 'People records' },
-  { key: 'contact', label: 'Contact', description: 'Client directory' },
-  { key: 'equipment', label: 'Equipment', description: 'Fleet assets' },
-  { key: 'payment', label: 'Payment Method', description: 'Billing setup' },
-] as const
+type DashboardPageProps = {
+  initialModule?: NavigationKey
+  onModuleChange?: (key: NavigationKey) => void
+}
 
-type NavigationKey = (typeof navigationItems)[number]['key']
-
-export function DashboardPage() {
-  const [activeModule, setActiveModule] = useState<NavigationKey>('dashboard')
+export function DashboardPage({ initialModule = 'dashboard', onModuleChange }: DashboardPageProps) {
+  const [activeModule, setActiveModule] = useState<NavigationKey>(initialModule)
   const [feedback, setFeedback] = useState('')
+
+  useEffect(() => {
+    setActiveModule(initialModule)
+  }, [initialModule])
 
   const handleFeedback = (message: string) => {
     setFeedback(message)
@@ -138,6 +138,7 @@ export function DashboardPage() {
       onNavigationSelect={(key) => {
         const nextKey = key as NavigationKey
         setActiveModule(nextKey)
+        onModuleChange?.(nextKey)
         handleFeedback(`Opened ${navigationItems.find((item) => item.key === nextKey)?.label} workspace.`)
       }}
       actionMessage={feedback}
