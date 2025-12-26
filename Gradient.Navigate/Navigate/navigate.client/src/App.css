@@ -14,10 +14,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2.5rem;
+  padding: 2rem 3rem;
   background: #ffffff;
   border-bottom: 1px solid #e0e6f0;
-  gap: 1.5rem;
+  gap: 1.75rem;
   flex-wrap: wrap;
 }
 
@@ -40,7 +40,7 @@
 .preview-shell__tab {
   border: 1px solid #d4dbe7;
   background: #f7f9fc;
-  padding: 0.45rem 0.9rem;
+  padding: 0.55rem 1.1rem;
   border-radius: 999px;
   font-size: 0.9rem;
   cursor: pointer;
@@ -56,11 +56,12 @@
 .preview-shell__content {
   flex: 1;
   min-height: 0;
+  padding: 1.5rem 2.5rem 2.5rem;
 }
 
 .action-feedback {
   margin: 0 2.5rem;
-  padding: 0.75rem 1rem;
+  padding: 0.85rem 1.1rem;
   border-radius: 10px;
   background: #eef3ff;
   color: #2b3b5f;
@@ -70,7 +71,7 @@
 
 .action-feedback--inline {
   margin: 0;
-  padding: 0.6rem 0.85rem;
+  padding: 0.7rem 0.95rem;
   border-radius: 8px;
   background: #edf2fb;
   border-color: #dbe3f4;
@@ -87,7 +88,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3rem 2.5rem;
+  padding: 3.5rem 3rem;
   background-color: #f7f9fc;
   background-image: url('./assets/login-topography.svg');
   background-size: cover;
@@ -111,15 +112,15 @@
 .auth-card {
   width: min(440px, 100%);
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: 18px;
   box-shadow: 0 20px 40px rgba(37, 51, 74, 0.15);
-  padding: 2.5rem 2.75rem;
+  padding: 2.75rem 3rem;
   border: 1px solid #dfe4ef;
 }
 
 .auth-card__header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.25rem;
 }
 
 .auth-card__brand {
@@ -149,7 +150,7 @@
 .auth-card__content {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .auth-card__footer {
@@ -159,17 +160,17 @@
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .auth-field {
   display: flex;
   align-items: center;
   border: 1px solid #cad3e3;
-  border-radius: 6px;
-  background: #eef3fb;
-  padding: 0.6rem 0.75rem;
-  gap: 0.5rem;
+  border-radius: 8px;
+  background: #f1f5fb;
+  padding: 0.75rem 0.9rem;
+  gap: 0.65rem;
 }
 
 .auth-field__icon {
@@ -199,7 +200,7 @@
 
 .auth-links {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.6rem;
   font-size: 0.9rem;
   color: #6b778c;
 }
@@ -218,18 +219,28 @@
 
 .auth-button {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.85rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
 .auth-button--primary {
   background: #1f2a5a;
   color: #ffffff;
   box-shadow: 0 12px 20px rgba(31, 42, 90, 0.25);
+}
+
+.auth-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 22px rgba(31, 42, 90, 0.2);
+}
+
+.auth-link:hover {
+  text-decoration: underline;
 }
 
 .auth-button--secondary {
@@ -292,10 +303,10 @@
 .app-shell__sidebar {
   background: #1f2a44;
   color: #f5f7fb;
-  padding: 2rem 1.5rem;
+  padding: 2.5rem 1.75rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.25rem;
 }
 
 .app-shell__logo p {
@@ -312,13 +323,13 @@
 .app-shell__nav {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.9rem;
 }
 
 .app-shell__nav-section {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.9rem;
 }
 
 .app-shell__nav-title {
@@ -333,13 +344,13 @@
   text-align: left;
   border: 1px solid transparent;
   border-radius: 12px;
-  padding: 0.65rem 0.75rem;
+  padding: 0.75rem 0.9rem;
   background: transparent;
   color: inherit;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.35rem;
 }
 
 .app-shell__nav-item small {
@@ -438,7 +449,7 @@
 }
 
 .app-shell__header {
-  padding: 2rem 2.5rem 1.5rem;
+  padding: 2.5rem 3rem 1.75rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -458,7 +469,7 @@
 
 .app-shell__header-actions {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.9rem;
   flex-wrap: wrap;
 }
 
@@ -469,6 +480,12 @@
   padding: 0.6rem 1rem;
   border-radius: 10px;
   cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.app-shell__ghost:hover {
+  background: #f4f7fc;
+  border-color: #bfc9dd;
 }
 
 .app-shell__action {
@@ -479,29 +496,35 @@
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 0 12px 20px rgba(31, 42, 90, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.app-shell__action:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 24px rgba(31, 42, 90, 0.2);
 }
 
 .app-shell__main {
-  padding: 0 2.5rem 2.5rem;
+  padding: 0 3rem 3rem;
   min-width: 0;
 }
 
 .dashboard {
   display: flex;
   flex-direction: column;
-  gap: 1.8rem;
+  gap: 2.25rem;
 }
 
 .dashboard__stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .stat-card {
   background: #ffffff;
   border-radius: 14px;
-  padding: 1.25rem 1.4rem;
+  padding: 1.5rem 1.6rem;
   box-shadow: 0 12px 24px rgba(31, 42, 90, 0.08);
 }
 
@@ -524,7 +547,7 @@
 .dashboard__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 .dashboard__grid--secondary {
@@ -534,11 +557,11 @@
 .data-card {
   background: #ffffff;
   border-radius: 16px;
-  padding: 1.5rem;
+  padding: 1.75rem;
   box-shadow: 0 12px 24px rgba(31, 42, 90, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1.4rem;
 }
 
 .data-card__header {
@@ -566,11 +589,17 @@
   padding: 0.5rem 0.9rem;
   border-radius: 10px;
   cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.data-card__action:hover {
+  background: #eef3fb;
+  border-color: #c7d2e6;
 }
 
 .data-table {
   display: grid;
-  gap: 0.6rem;
+  gap: 0.75rem;
 }
 
 .table-pagination {
@@ -613,9 +642,10 @@
 .data-table__row {
   display: grid;
   grid-template-columns: 120px 1.2fr 1.4fr 120px 110px;
-  gap: 0.75rem;
+  gap: 1rem;
   font-size: 0.9rem;
   align-items: center;
+  padding: 0.35rem 0;
 }
 
 .data-table__row--header {
@@ -653,22 +683,22 @@
 .activity-list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .activity-item {
   display: flex;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .management {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.75rem;
   background: #ffffff;
   border: 1px solid #e0e6f0;
   border-radius: 18px;
-  padding: 2rem;
+  padding: 2.25rem;
   box-shadow: 0 16px 40px rgba(31, 42, 68, 0.08);
 }
 
@@ -676,7 +706,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 .management__header h2 {
@@ -691,7 +721,7 @@
 
 .management__tabs {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
 }
 
@@ -714,13 +744,13 @@
 .management-view {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 .management-view__header {
   display: flex;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1.75rem;
   flex-wrap: wrap;
 }
 
@@ -772,7 +802,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 1.25rem 0.5rem;
+  padding: 1.5rem 1.5rem 0.75rem;
   gap: 1rem;
 }
 
@@ -788,6 +818,12 @@
   height: 36px;
   border-radius: 8px;
   cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.management-card__actions button:hover {
+  background: #f4f7fc;
+  border-color: #bfc9dd;
 }
 
 .management-card__search {
@@ -795,7 +831,7 @@
   align-items: center;
   gap: 0.5rem;
   border: 1px solid #d4dbe7;
-  padding: 0.4rem 0.75rem;
+  padding: 0.5rem 0.85rem;
   border-radius: 10px;
   background: #ffffff;
   min-width: 220px;
@@ -810,16 +846,16 @@
 .management-table {
   display: flex;
   flex-direction: column;
-  padding: 0.5rem 1.25rem 1.5rem;
-  gap: 0.65rem;
+  padding: 0.75rem 1.5rem 1.75rem;
+  gap: 0.75rem;
   overflow-x: auto;
 }
 
 .management-table__row {
   display: grid;
   grid-template-columns: repeat(7, minmax(120px, 1fr)) minmax(240px, 1.1fr);
-  gap: 1rem;
-  padding: 0.35rem 0;
+  gap: 1.25rem;
+  padding: 0.5rem 0;
   align-items: center;
   border-bottom: 1px solid #eef1f7;
   font-size: 0.9rem;
@@ -875,14 +911,14 @@
 }
 
 .management-card__footer {
-  padding: 0 1.25rem 1.5rem;
+  padding: 0 1.5rem 1.75rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .management-card__columns {
-  padding: 0 1.25rem 0.75rem;
+  padding: 0 1.5rem 0.9rem;
 }
 
 .management-card__columns-title {
@@ -927,8 +963,8 @@
 
 .employee-tabs {
   display: flex;
-  gap: 0.5rem;
-  padding: 1rem 1.25rem 0;
+  gap: 0.75rem;
+  padding: 1.25rem 1.5rem 0;
 }
 
 .employee-tabs__tab {
@@ -946,7 +982,7 @@
 }
 
 .employee-details {
-  padding: 1.25rem;
+  padding: 1.5rem;
   border-top: 1px solid #dfe4ef;
 }
 
@@ -1030,8 +1066,8 @@
 
 .payment-tabs {
   display: flex;
-  gap: 0.5rem;
-  padding: 1rem 1.25rem 0;
+  gap: 0.75rem;
+  padding: 1.25rem 1.5rem 0;
 }
 
 .payment-tabs__tab {
@@ -1073,7 +1109,7 @@
 .guest-payment {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 .guest-payment-page {
@@ -1081,21 +1117,21 @@
   background: #f3f6fb;
   display: flex;
   justify-content: center;
-  padding: 3rem 3.5rem;
+  padding: 3.5rem 4rem;
 }
 
 .guest-payment-page__content {
   width: min(1100px, 100%);
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 .guest-payment-page__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1.75rem;
   flex-wrap: wrap;
 }
 
@@ -1142,10 +1178,10 @@
   background: #f7f9fc;
   border: 1px solid #dfe4ef;
   border-radius: 12px;
-  padding: 1.25rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .guest-payment__panel-header h3 {
@@ -1161,7 +1197,7 @@
 .guest-payment__form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .guest-payment__field {
@@ -1187,7 +1223,7 @@
   grid-column: 1 / -1;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
   flex-wrap: wrap;
 }
 
@@ -1229,11 +1265,11 @@
 .module-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .module-card {
-  padding: 1rem;
+  padding: 1.25rem;
   border-radius: 12px;
   border: 1px solid #e3e8f2;
   background: #f9fbff;
@@ -1253,14 +1289,14 @@
 .task-list {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 1.1rem;
 }
 
 .task-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .task-item__title {
