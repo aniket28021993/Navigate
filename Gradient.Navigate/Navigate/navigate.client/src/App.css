@@ -1114,6 +1114,31 @@
   font-size: 1rem;
 }
 
+.payment-action--icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d4dbe7;
+  background: #ffffff;
+}
+
+.payment-action--icon[aria-pressed='true'] {
+  border-color: #1f5dbb;
+  color: #1f5dbb;
+}
+
+.payment-multiselect {
+  min-width: 140px;
+  border-radius: 8px;
+  border: 1px solid #d4dbe7;
+  padding: 0.35rem 0.6rem;
+  background: #ffffff;
+  font-size: 0.95rem;
+}
+
 .payment-footer a {
   color: #1f5dbb;
   text-decoration: none;
