@@ -132,7 +132,7 @@ export function EmployeeProfilePage() {
               <div className="employee-details__documents-header">
                 <div>
                   <strong>Documents</strong>
-                  <p>Download all employee files in one click.</p>
+                  <p>Download all employee files at once.</p>
                 </div>
                 <button type="button" onClick={handleDownloadDocuments}>
                   ⬇ Download all
