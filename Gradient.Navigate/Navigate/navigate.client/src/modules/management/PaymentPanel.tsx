@@ -8,6 +8,11 @@ type PaymentMethod = {
   isDefault: boolean
 }
 
+type PaymentPopup = {
+  type: 'success' | 'error'
+  message: string
+}
+
 const initialPaymentMethods: PaymentMethod[] = [
   {
     id: 'card-0080',
@@ -37,6 +42,7 @@ const initialPaymentMethods: PaymentMethod[] = [
 
 export function PaymentPanel() {
   const [status, setStatus] = useState('')
+  const [popup, setPopup] = useState<PaymentPopup | null>(null)
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>(initialPaymentMethods)
   const [autoPayMethodId, setAutoPayMethodId] = useState<string | null>('card-0080')
   const [currentPage, setCurrentPage] = useState(1)
@@ -50,6 +56,14 @@ export function PaymentPanel() {
       setCurrentPage(totalPages)
     }
   }, [currentPage, totalPages])
+
+  useEffect(() => {
+    if (!popup) {
+      return
+    }
+    const timeout = window.setTimeout(() => setPopup(null), 3500)
+    return () => window.clearTimeout(timeout)
+  }, [popup])
 
   const handleAutoPayChange = (id: string, selectedValues: string[]) => {
     const hasTelematics = selectedValues.includes('Telematics')
@@ -139,18 +153,37 @@ export function PaymentPanel() {
             <button
               className="management-card__primary"
               type="button"
-              onClick={() => setStatus('Credit card account form opened.')}
+              onClick={() =>
+                setPopup({
+                  type: 'success',
+                  message: 'Credit card account form opened.',
+                })
+              }
             >
               Add Credit Card Account
             </button>
             <button
               className="management-card__primary"
               type="button"
-              onClick={() => setStatus('ACH account form opened.')}
+              onClick={() =>
+                setPopup({
+                  type: 'error',
+                  message: 'ACH account form is unavailable right now.',
+                })
+              }
             >
               Add ACH Account
             </button>
           </div>
+          {popup ? (
+            <div
+              className={`payment-popup payment-popup--${popup.type}`}
+              role="status"
+              aria-live="polite"
+            >
+              <strong>{popup.type === 'success' ? 'Success' : 'Error'}:</strong> {popup.message}
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

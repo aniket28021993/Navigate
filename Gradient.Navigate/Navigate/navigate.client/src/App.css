@@ -1107,6 +1107,26 @@
   align-items: center;
 }
 
+.payment-popup {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+}
+
+.payment-popup--success {
+  background: #e6f7ef;
+  border-color: #b4e2cd;
+  color: #1e6a47;
+}
+
+.payment-popup--error {
+  background: #fbecec;
+  border-color: #f1b7b7;
+  color: #8a1f1f;
+}
+
 .payment-action {
   background: transparent;
   border: none;
