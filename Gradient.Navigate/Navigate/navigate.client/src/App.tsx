@@ -5,11 +5,19 @@ import { LoginPage } from './modules/auth/LoginPage'
 import { PasswordRecoveryPage } from './modules/auth/PasswordRecoveryPage'
 import { RegistrationPage } from './modules/auth/RegistrationPage'
 import { GuestPaymentPage } from './modules/payment/GuestPaymentPage'
+import { EmployeeProfilePage } from './modules/management/EmployeeProfilePage'
 
-type AppView = 'login' | 'registration' | 'recovery' | 'dashboard' | 'guest-payment'
+type AppView = 'login' | 'registration' | 'recovery' | 'dashboard' | 'guest-payment' | 'employee-profile'
+
+const getInitialView = (): AppView => {
+  if (window.location.hash.startsWith('#employee/')) {
+    return 'employee-profile'
+  }
+  return 'login'
+}
 
 function App() {
-  const [view, setView] = useState<AppView>('login')
+  const [view, setView] = useState<AppView>(getInitialView)
 
   const content = useMemo(() => {
     switch (view) {
@@ -21,6 +29,8 @@ function App() {
         return <DashboardPage />
       case 'guest-payment':
         return <GuestPaymentPage onBackToLogin={() => setView('login')} />
+      case 'employee-profile':
+        return <EmployeeProfilePage />
       default:
         return (
           <LoginPage

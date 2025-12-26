@@ -1,97 +1,5 @@
 import { useMemo, useState } from 'react'
-
-type Employee = {
-  id: string
-  lastName: string
-  firstName: string
-  phone: string
-  email: string
-  dob: string
-  hireDate: string
-  jobTitle: string
-  licenseNumber: string
-  licenseState: string
-  licenseClass: string
-  documents: Array<{ name: string; type: string; uploaded: string }>
-  emergencyContact: {
-    name: string
-    relationship: string
-    phone: string
-    email: string
-  }
-}
-
-const employeeRows: Employee[] = [
-  {
-    id: 'emp-001',
-    lastName: 'Driver',
-    firstName: 'New',
-    phone: '(480) 555-0112',
-    email: 'newdriver@prodemo.com',
-    dob: '1/1/1990',
-    hireDate: '7/31/2025',
-    jobTitle: 'Commercial Driver',
-    licenseNumber: '008012',
-    licenseState: 'AZ',
-    licenseClass: 'A',
-    documents: [
-      { name: 'CDL License', type: 'PDF', uploaded: '7/20/2025' },
-      { name: 'Medical Card', type: 'PDF', uploaded: '7/21/2025' },
-    ],
-    emergencyContact: {
-      name: 'Jamie Driver',
-      relationship: 'Spouse',
-      phone: '(480) 555-0144',
-      email: 'jamie.driver@prodemo.com',
-    },
-  },
-  {
-    id: 'emp-002',
-    lastName: 'Ortiz',
-    firstName: 'Carla',
-    phone: '(602) 555-0199',
-    email: 'cortiz@prodemo.com',
-    dob: '4/18/1987',
-    hireDate: '3/14/2023',
-    jobTitle: 'Dispatcher',
-    licenseNumber: 'AZ-11042',
-    licenseState: 'AZ',
-    licenseClass: 'D',
-    documents: [
-      { name: 'Signed Handbook', type: 'PDF', uploaded: '3/16/2023' },
-      { name: 'W-4', type: 'PDF', uploaded: '3/15/2023' },
-    ],
-    emergencyContact: {
-      name: 'Luis Ortiz',
-      relationship: 'Brother',
-      phone: '(602) 555-0188',
-      email: 'lortiz@prodemo.com',
-    },
-  },
-  {
-    id: 'emp-003',
-    lastName: 'Patel',
-    firstName: 'Meera',
-    phone: '(623) 555-0123',
-    email: 'mpatel@prodemo.com',
-    dob: '9/12/1992',
-    hireDate: '11/2/2022',
-    jobTitle: 'Safety Coordinator',
-    licenseNumber: 'CA-55201',
-    licenseState: 'CA',
-    licenseClass: 'C',
-    documents: [
-      { name: 'Certification', type: 'PDF', uploaded: '11/1/2022' },
-      { name: 'Training Log', type: 'PDF', uploaded: '11/5/2022' },
-    ],
-    emergencyContact: {
-      name: 'Ravi Patel',
-      relationship: 'Father',
-      phone: '(623) 555-0145',
-      email: 'rpatel@prodemo.com',
-    },
-  },
-]
+import { employeeRows } from './employeeData'
 
 const employeeColumns = [
   { id: 'lastName', label: 'Last Name' },
@@ -119,8 +27,6 @@ export function EmployeePanel() {
   const [visibleColumns, setVisibleColumns] = useState<Set<string>>(
     new Set(employeeColumns.map((column) => column.id)),
   )
-  const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null)
-  const [activeTab, setActiveTab] = useState<'general' | 'documents' | 'emergency'>('general')
 
   const filteredEmployees = useMemo(() => {
     const normalizedSearch = searchTerm.trim().toLowerCase()
@@ -145,7 +51,7 @@ export function EmployeePanel() {
   }, [filters, searchTerm])
 
   const visibleColumnList = employeeColumns.filter((column) => visibleColumns.has(column.id))
-  const gridTemplateColumns = `repeat(${visibleColumnList.length}, minmax(140px, 1fr)) minmax(120px, 0.6fr)`
+  const gridTemplateColumns = `minmax(56px, 0.35fr) repeat(${visibleColumnList.length}, minmax(140px, 1fr))`
 
   const handleFilterChange = (columnId: string, value: string) => {
     setFilters((prev) => ({
@@ -197,20 +103,9 @@ export function EmployeePanel() {
     setStatus('Roster download prepared.')
   }
 
-  const handleSelectEmployee = (employee: Employee) => {
-    setSelectedEmployee(employee)
-    setActiveTab('general')
-  }
-
-  const handleDownloadDocuments = () => {
-    if (!selectedEmployee) {
-      return
-    }
-    const documentList = selectedEmployee.documents
-      .map((doc) => `${doc.name} (${doc.type}) - ${doc.uploaded}`)
-      .join('\n')
-    downloadFile(`${selectedEmployee.lastName}-documents.txt`, documentList, 'text/plain')
-    setStatus(`Downloaded all documents for ${selectedEmployee.firstName} ${selectedEmployee.lastName}.`)
+  const handleSelectEmployee = (employeeId: string) => {
+    const target = `${window.location.origin}${window.location.pathname}#employee/${encodeURIComponent(employeeId)}`
+    window.open(target, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -269,12 +164,13 @@ export function EmployeePanel() {
         {status ? <div className="action-feedback action-feedback--inline">{status}</div> : null}
         <div className="management-table">
           <div className="management-table__row management-table__row--header" style={{ gridTemplateColumns }}>
+            <span>View</span>
             {visibleColumnList.map((column) => (
               <span key={column.id}>{column.label}</span>
             ))}
-            <span>Actions</span>
           </div>
           <div className="management-table__row management-table__row--filters" style={{ gridTemplateColumns }}>
+            <span />
             {visibleColumnList.map((column) => (
               <span key={`filter-${column.id}`}>
                 <input
@@ -285,21 +181,20 @@ export function EmployeePanel() {
                 />
               </span>
             ))}
-            <span />
           </div>
           {filteredEmployees.length ? (
             filteredEmployees.map((employee) => (
               <div key={employee.id} className="management-table__row" style={{ gridTemplateColumns }}>
+                <span className="management-table__actions">
+                  <button type="button" aria-label="View employee profile" onClick={() => handleSelectEmployee(employee.id)}>
+                    👁️
+                  </button>
+                </span>
                 {visibleColumnList.map((column) => (
                   <span key={`${employee.id}-${column.id}`} data-label={column.label}>
                     {String((employee as Record<string, string>)[column.id] ?? '')}
                   </span>
                 ))}
-                <span className="management-table__actions">
-                  <button type="button" onClick={() => handleSelectEmployee(employee)}>
-                    View
-                  </button>
-                </span>
               </div>
             ))
           ) : (
@@ -314,133 +209,6 @@ export function EmployeePanel() {
           </button>
         </div>
       </div>
-      {selectedEmployee ? (
-        <div className="management-card management-card--details">
-          <div className="management-card__title">
-            👤 Employee Profile · {selectedEmployee.firstName} {selectedEmployee.lastName}
-          </div>
-          <div className="employee-tabs">
-            <button
-              type="button"
-              className={`employee-tabs__tab ${activeTab === 'general' ? 'employee-tabs__tab--active' : ''}`}
-              onClick={() => setActiveTab('general')}
-            >
-              General
-            </button>
-            <button
-              type="button"
-              className={`employee-tabs__tab ${activeTab === 'documents' ? 'employee-tabs__tab--active' : ''}`}
-              onClick={() => setActiveTab('documents')}
-            >
-              Documents
-            </button>
-            <button
-              type="button"
-              className={`employee-tabs__tab ${activeTab === 'emergency' ? 'employee-tabs__tab--active' : ''}`}
-              onClick={() => setActiveTab('emergency')}
-            >
-              Emergency Contact
-            </button>
-          </div>
-          <div className="employee-details">
-            {activeTab === 'general' ? (
-              <div className="employee-details__grid">
-                <div>
-                  <span className="employee-details__label">Name</span>
-                  <span>
-                    {selectedEmployee.firstName} {selectedEmployee.lastName}
-                  </span>
-                </div>
-                <div>
-                  <span className="employee-details__label">Job Title</span>
-                  <span>{selectedEmployee.jobTitle}</span>
-                </div>
-                <div>
-                  <span className="employee-details__label">Hire Date</span>
-                  <span>{selectedEmployee.hireDate}</span>
-                </div>
-                <div>
-                  <span className="employee-details__label">Date Of Birth</span>
-                  <span>{selectedEmployee.dob}</span>
-                </div>
-                <div>
-                  <span className="employee-details__label">Phone</span>
-                  <span>{selectedEmployee.phone}</span>
-                </div>
-                <div>
-                  <span className="employee-details__label">Email</span>
-                  <span>{selectedEmployee.email}</span>
-                </div>
-                <div>
-                  <span className="employee-details__label">License Number</span>
-                  <span>{selectedEmployee.licenseNumber}</span>
-                </div>
-                <div>
-                  <span className="employee-details__label">License State</span>
-                  <span>{selectedEmployee.licenseState}</span>
-                </div>
-                <div>
-                  <span className="employee-details__label">License Class</span>
-                  <span>{selectedEmployee.licenseClass}</span>
-                </div>
-              </div>
-            ) : null}
-            {activeTab === 'documents' ? (
-              <div className="employee-details__documents">
-                <div className="employee-details__documents-header">
-                  <div>
-                    <strong>Documents</strong>
-                    <p>Download all employee files in one click.</p>
-                  </div>
-                  <button type="button" onClick={handleDownloadDocuments}>
-                    ⬇ Download all
-                  </button>
-                </div>
-                <div className="employee-details__documents-list">
-                  {selectedEmployee.documents.map((doc) => (
-                    <div key={doc.name} className="employee-details__document">
-                      <div>
-                        <strong>{doc.name}</strong>
-                        <span>
-                          {doc.type} · Uploaded {doc.uploaded}
-                        </span>
-                      </div>
-                      <button type="button" onClick={() => setStatus(`Downloaded ${doc.name}.`)}>
-                        ⤓
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : null}
-            {activeTab === 'emergency' ? (
-              <div className="employee-details__grid">
-                <div>
-                  <span className="employee-details__label">Name</span>
-                  <span>{selectedEmployee.emergencyContact.name}</span>
-                </div>
-                <div>
-                  <span className="employee-details__label">Relationship</span>
-                  <span>{selectedEmployee.emergencyContact.relationship}</span>
-                </div>
-                <div>
-                  <span className="employee-details__label">Phone</span>
-                  <span>{selectedEmployee.emergencyContact.phone}</span>
-                </div>
-                <div>
-                  <span className="employee-details__label">Email</span>
-                  <span>{selectedEmployee.emergencyContact.email}</span>
-                </div>
-              </div>
-            ) : null}
-          </div>
-          <div className="management-card__footer">
-            <button className="management-card__primary" type="button" onClick={() => setSelectedEmployee(null)}>
-              Back to list
-            </button>
-          </div>
-        </div>
-      ) : null}
     </div>
   )
 }
