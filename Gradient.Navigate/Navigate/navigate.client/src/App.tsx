@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import './App.css'
 import { DashboardPage } from './modules/dashboard/DashboardPage'
 import { LoginPage } from './modules/auth/LoginPage'
@@ -7,88 +8,34 @@ import { RegistrationPage } from './modules/auth/RegistrationPage'
 import { GuestPaymentPage } from './modules/payment/GuestPaymentPage'
 import { EmployeeProfilePage } from './modules/management/EmployeeProfilePage'
 
-type AppView = 'login' | 'registration' | 'recovery' | 'dashboard' | 'guest-payment' | 'employee-profile'
-
-const getViewFromHash = (hash: string): AppView | null => {
-  if (hash.startsWith('#employee/')) {
-    return 'employee-profile'
-  }
-
-  switch (hash) {
-    case '#dashboard':
-      return 'dashboard'
-    case '#registration':
-      return 'registration'
-    case '#recovery':
-      return 'recovery'
-    case '#guest-payment':
-      return 'guest-payment'
-    case '#login':
-      return 'login'
-    default:
-      return null
-  }
-}
-
-const getInitialView = (): AppView => getViewFromHash(window.location.hash) ?? 'login'
-
-const viewToHash: Partial<Record<AppView, string>> = {
-  dashboard: '#dashboard',
-  registration: '#registration',
-  recovery: '#recovery',
-  'guest-payment': '#guest-payment',
-  login: '#login',
-}
-
 function App() {
-  const [view, setView] = useState<AppView>(getInitialView)
-
-  useEffect(() => {
-    const handleHashChange = () => {
-      const nextView = getViewFromHash(window.location.hash)
-      if (nextView) {
-        setView(nextView)
-      }
-    }
-
-    window.addEventListener('hashchange', handleHashChange)
-    return () => window.removeEventListener('hashchange', handleHashChange)
-  }, [])
-
-  const setViewAndHash = (nextView: AppView, hashOverride?: string) => {
-    setView(nextView)
-    const nextHash = hashOverride ?? viewToHash[nextView]
-    if (!nextHash) {
-      return
-    }
-    if (window.location.hash !== nextHash) {
-      window.location.hash = nextHash
-    }
-  }
+  const navigate = useNavigate()
 
   const content = useMemo(() => {
-    switch (view) {
-      case 'registration':
-        return <RegistrationPage onBackToLogin={() => setViewAndHash('login')} />
-      case 'recovery':
-        return <PasswordRecoveryPage onBackToLogin={() => setViewAndHash('login')} />
-      case 'dashboard':
-        return <DashboardPage />
-      case 'guest-payment':
-        return <GuestPaymentPage onBackToLogin={() => setViewAndHash('login')} />
-      case 'employee-profile':
-        return <EmployeeProfilePage />
-      default:
-        return (
-          <LoginPage
-            onLogin={() => setViewAndHash('dashboard')}
-            onNavigateRecovery={() => setViewAndHash('recovery')}
-            onNavigateRegistration={() => setViewAndHash('registration')}
-            onNavigateGuestPayment={() => setViewAndHash('guest-payment')}
-          />
-        )
-    }
-  }, [view])
+    return (
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route
+          path="/login"
+          element={
+            <LoginPage
+              onLogin={() => navigate('/dashboard')}
+              onNavigateRecovery={() => navigate('/recovery')}
+              onNavigateRegistration={() => navigate('/registration')}
+              onNavigateGuestPayment={() => navigate('/guest-payment')}
+            />
+          }
+        />
+        <Route path="/registration" element={<RegistrationPage onBackToLogin={() => navigate('/login')} />} />
+        <Route path="/recovery" element={<PasswordRecoveryPage onBackToLogin={() => navigate('/login')} />} />
+        <Route path="/guest-payment" element={<GuestPaymentPage onBackToLogin={() => navigate('/login')} />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/dashboard/:section" element={<DashboardPage />} />
+        <Route path="/employee/:employeeId" element={<EmployeeProfilePage />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    )
+  }, [navigate])
 
   return <>{content}</>
 }

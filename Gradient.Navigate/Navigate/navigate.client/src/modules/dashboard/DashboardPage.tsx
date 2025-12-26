@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { AppShell } from '../shared/layout/AppShell'
 import { navigationItems } from '../shared/layout/navigationItems'
 import type { NavigationKey } from '../shared/layout/navigationItems'
@@ -94,8 +95,23 @@ const tasks = [
 ]
 
 export function DashboardPage() {
+  const navigate = useNavigate()
+  const { section } = useParams<{ section?: string }>()
   const [activeModule, setActiveModule] = useState<NavigationKey>('dashboard')
   const [feedback, setFeedback] = useState('')
+  const validKeys = useMemo(() => new Set(navigationItems.map((item) => item.key)), [])
+
+  useEffect(() => {
+    if (!section) {
+      setActiveModule('dashboard')
+      return
+    }
+    if (!validKeys.has(section)) {
+      navigate('/dashboard', { replace: true })
+      return
+    }
+    setActiveModule(section as NavigationKey)
+  }, [navigate, section, validKeys])
 
   const handleFeedback = (message: string) => {
     setFeedback(message)
@@ -129,7 +145,8 @@ export function DashboardPage() {
       activeNavigationKey={activeModule}
       onNavigationSelect={(key) => {
         const nextKey = key as NavigationKey
-        setActiveModule(nextKey)
+        const target = nextKey === 'dashboard' ? '/dashboard' : `/dashboard/${nextKey}`
+        navigate(target)
         handleFeedback(`Opened ${navigationItems.find((item) => item.key === nextKey)?.label} workspace.`)
       }}
       actionMessage={feedback}
