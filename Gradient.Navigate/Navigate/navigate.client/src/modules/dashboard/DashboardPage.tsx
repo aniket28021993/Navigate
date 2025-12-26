@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { AppShell } from '../shared/layout/AppShell'
-import { NavigationKey, navigationItems } from '../shared/layout/navigationItems'
+import { navigationItems } from '../shared/layout/navigationItems'
+import type { NavigationKey } from '../shared/layout/navigationItems'
 import { ContactPanel } from '../management/ContactPanel'
 import { EmployeePanel } from '../management/EmployeePanel'
 import { EquipmentPanel } from '../management/EquipmentPanel'
