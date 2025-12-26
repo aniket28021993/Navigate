@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from '../../router'
 import { AppShell } from '../shared/layout/AppShell'
 import { navigationItems } from '../shared/layout/navigationItems'
 import { employeeRows } from './employeeData'

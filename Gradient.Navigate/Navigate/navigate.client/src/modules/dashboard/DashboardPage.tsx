@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from '../../router'
 import { AppShell } from '../shared/layout/AppShell'
 import { navigationItems } from '../shared/layout/navigationItems'
 import type { NavigationKey } from '../shared/layout/navigationItems'

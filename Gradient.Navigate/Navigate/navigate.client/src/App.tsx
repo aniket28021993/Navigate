@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
+import { Navigate, Route, Routes, useNavigate } from './router'
 import './App.css'
 import { DashboardPage } from './modules/dashboard/DashboardPage'
 import { LoginPage } from './modules/auth/LoginPage'
