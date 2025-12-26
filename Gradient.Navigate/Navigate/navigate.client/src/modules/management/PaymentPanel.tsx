@@ -6,7 +6,6 @@ type PaymentMethod = {
   type: 'Credit Card' | 'ACH'
   account: string
   isDefault: boolean
-  autoPayEnabled: boolean
 }
 
 const initialPaymentMethods: PaymentMethod[] = [
@@ -15,34 +14,31 @@ const initialPaymentMethods: PaymentMethod[] = [
     type: 'Credit Card',
     account: '**** **** **** 0080',
     isDefault: true,
-    autoPayEnabled: true,
   },
   {
     id: 'card-1144',
     type: 'Credit Card',
     account: '**** **** **** 1144',
     isDefault: false,
-    autoPayEnabled: false,
   },
   {
     id: 'ach-7391',
     type: 'ACH',
     account: '**** **** **** 7391',
     isDefault: false,
-    autoPayEnabled: true,
   },
   {
     id: 'ach-2205',
     type: 'ACH',
     account: '**** **** **** 2205',
     isDefault: false,
-    autoPayEnabled: false,
   },
 ]
 
 export function PaymentPanel() {
   const [status, setStatus] = useState('')
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>(initialPaymentMethods)
+  const [autoPayMethodId, setAutoPayMethodId] = useState<string | null>('card-0080')
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 5
   const totalPages = Math.max(1, Math.ceil(paymentMethods.length / pageSize))
@@ -55,13 +51,10 @@ export function PaymentPanel() {
     }
   }, [currentPage, totalPages])
 
-  const handleAutoPayToggle = (id: string) => {
-    setPaymentMethods((prev) =>
-      prev.map((method) =>
-        method.id === id ? { ...method, autoPayEnabled: !method.autoPayEnabled } : method
-      )
-    )
-    setStatus('Auto-pay configuration updated.')
+  const handleAutoPayChange = (id: string, selectedValues: string[]) => {
+    const hasTelematics = selectedValues.includes('Telematics')
+    setAutoPayMethodId(hasTelematics ? id : null)
+    setStatus('Auto-pay provider updated.')
   }
 
   const handleSetDefault = (id: string) => {
@@ -73,6 +66,7 @@ export function PaymentPanel() {
 
   const handleDeleteMethod = (id: string) => {
     setPaymentMethods((prev) => prev.filter((method) => method.id !== id))
+    setAutoPayMethodId((prev) => (prev === id ? null : prev))
     setStatus('Payment method removed from demo list.')
   }
 
@@ -93,32 +87,41 @@ export function PaymentPanel() {
             <div key={row.id} className="management-table__row">
               <span data-label="Type">{row.type}</span>
               <span data-label="Account">{row.account}</span>
-              <span data-label="Default">{row.isDefault ? '✔' : '—'}</span>
-              <span data-label="Auto-Pay">
+              <span data-label="Default">
                 <button
                   type="button"
-                  className="payment-action"
-                  aria-pressed={row.autoPayEnabled}
-                  onClick={() => handleAutoPayToggle(row.id)}
+                  className="payment-action payment-action--icon"
+                  aria-pressed={row.isDefault}
+                  onClick={() => handleSetDefault(row.id)}
+                  title={row.isDefault ? 'Default payment method' : 'Set as default'}
                 >
-                  {row.autoPayEnabled ? 'Enabled' : 'Enable'}
+                  {row.isDefault ? '✔' : '○'}
                 </button>
+              </span>
+              <span data-label="Auto-Pay">
+                <select
+                  className="payment-multiselect"
+                  multiple
+                  size={1}
+                  value={row.id === autoPayMethodId ? ['Telematics'] : []}
+                  onChange={(event) => {
+                    const values = Array.from(event.currentTarget.selectedOptions).map(
+                      (option) => option.value
+                    )
+                    handleAutoPayChange(row.id, values)
+                  }}
+                >
+                  <option value="Telematics">Telematics</option>
+                </select>
               </span>
               <span data-label="Actions" className="payment-actions">
                 <button
                   type="button"
-                  className="payment-action"
-                  onClick={() => handleSetDefault(row.id)}
-                  disabled={row.isDefault}
-                >
-                  Set default
-                </button>
-                <button
-                  type="button"
-                  className="payment-action"
+                  className="payment-action payment-action--icon"
                   onClick={() => handleDeleteMethod(row.id)}
+                  aria-label={`Delete ${row.type} ${row.account}`}
                 >
-                  Delete
+                  🗑️
                 </button>
               </span>
             </div>
