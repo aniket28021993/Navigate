@@ -7,3 +7,5 @@ export const navigationItems = [
 ] as const
 
 export type NavigationKey = (typeof navigationItems)[number]['key']
+
+export const getNavigationPath = (key: NavigationKey) => (key === 'dashboard' ? '/dashboard' : `/${key}`)

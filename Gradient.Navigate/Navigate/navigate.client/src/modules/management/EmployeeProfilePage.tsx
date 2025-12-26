@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
 import { useNavigate, useParams } from '../../router'
 import { AppShell } from '../shared/layout/AppShell'
-import { navigationItems } from '../shared/layout/navigationItems'
+import { getNavigationPath, navigationItems } from '../shared/layout/navigationItems'
+import type { NavigationKey } from '../shared/layout/navigationItems'
 import { employeeRows } from './employeeData'
 
 export function EmployeeProfilePage() {
@@ -38,7 +39,7 @@ export function EmployeeProfilePage() {
   }
 
   const handleReturnToList = () => {
-    navigate('/dashboard/employee')
+    navigate('/employee')
   }
 
   const shellContent = !selectedEmployee ? (
@@ -189,8 +190,7 @@ export function EmployeeProfilePage() {
       navigationLinks={navigationItems}
       activeNavigationKey="employee"
       onNavigationSelect={(key) => {
-        const target = key === 'dashboard' ? '/dashboard' : `/dashboard/${key}`
-        navigate(target)
+        navigate(getNavigationPath(key as NavigationKey))
         setShellMessage(`Navigated to ${key} workspace.`)
       }}
       actionMessage={shellMessage}

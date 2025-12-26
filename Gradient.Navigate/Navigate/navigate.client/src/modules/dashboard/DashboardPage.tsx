@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from '../../router'
 import { AppShell } from '../shared/layout/AppShell'
-import { navigationItems } from '../shared/layout/navigationItems'
+import { getNavigationPath, navigationItems } from '../shared/layout/navigationItems'
 import type { NavigationKey } from '../shared/layout/navigationItems'
 import { ContactPanel } from '../management/ContactPanel'
 import { EmployeePanel } from '../management/EmployeePanel'
@@ -145,8 +145,7 @@ export function DashboardPage() {
       activeNavigationKey={activeModule}
       onNavigationSelect={(key) => {
         const nextKey = key as NavigationKey
-        const target = nextKey === 'dashboard' ? '/dashboard' : `/dashboard/${nextKey}`
-        navigate(target)
+        navigate(getNavigationPath(nextKey))
         handleFeedback(`Opened ${navigationItems.find((item) => item.key === nextKey)?.label} workspace.`)
       }}
       actionMessage={feedback}

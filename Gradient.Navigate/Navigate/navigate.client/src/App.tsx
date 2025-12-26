@@ -30,8 +30,8 @@ function App() {
         <Route path="/recovery" element={<PasswordRecoveryPage onBackToLogin={() => navigate('/login')} />} />
         <Route path="/guest-payment" element={<GuestPaymentPage onBackToLogin={() => navigate('/login')} />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/dashboard/:section" element={<DashboardPage />} />
         <Route path="/employee/:employeeId" element={<EmployeeProfilePage />} />
+        <Route path="/:section" element={<DashboardPage />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     )
