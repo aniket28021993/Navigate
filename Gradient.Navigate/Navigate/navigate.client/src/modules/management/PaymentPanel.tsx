@@ -78,7 +78,7 @@ export function PaymentPanel() {
             <p>
               To Make a Payment with a new{' '}
               <a
-                href="/"
+                href="#credit-card-enrollment"
                 onClick={(event) => {
                   event.preventDefault()
                   setStatus('Credit card enrollment link opened.')
@@ -90,7 +90,7 @@ export function PaymentPanel() {
             <p>
               To Make a Payment with a new{' '}
               <a
-                href="/"
+                href="#ach-enrollment"
                 onClick={(event) => {
                   event.preventDefault()
                   setStatus('ACH enrollment link opened.')
