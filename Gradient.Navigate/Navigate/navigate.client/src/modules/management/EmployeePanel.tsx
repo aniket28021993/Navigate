@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from '../../router'
 import { employeeRows } from './employeeData'
+import { TablePagination } from '../shared/components/TablePagination'
 
 const employeeColumns = [
   { id: 'lastName', label: 'Last Name' },
@@ -29,6 +30,8 @@ export function EmployeePanel() {
   const [visibleColumns, setVisibleColumns] = useState<Set<string>>(
     new Set(employeeColumns.map((column) => column.id)),
   )
+  const [currentPage, setCurrentPage] = useState(1)
+  const pageSize = 8
 
   const filteredEmployees = useMemo(() => {
     const normalizedSearch = searchTerm.trim().toLowerCase()
@@ -54,12 +57,18 @@ export function EmployeePanel() {
 
   const visibleColumnList = employeeColumns.filter((column) => visibleColumns.has(column.id))
   const gridTemplateColumns = `minmax(56px, 0.35fr) repeat(${visibleColumnList.length}, minmax(140px, 1fr))`
+  const totalPages = Math.max(1, Math.ceil(filteredEmployees.length / pageSize))
+  const paginatedEmployees = useMemo(() => {
+    const startIndex = (currentPage - 1) * pageSize
+    return filteredEmployees.slice(startIndex, startIndex + pageSize)
+  }, [currentPage, filteredEmployees, pageSize])
 
   const handleFilterChange = (columnId: string, value: string) => {
     setFilters((prev) => ({
       ...prev,
       [columnId]: value,
     }))
+    setCurrentPage(1)
   }
 
   const toggleColumnVisibility = (columnId: string) => {
@@ -109,6 +118,12 @@ export function EmployeePanel() {
     navigate(`/employee/${encodeURIComponent(employeeId)}`)
   }
 
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages)
+    }
+  }, [currentPage, totalPages])
+
   return (
     <div className="management-view">
       <div className="management-view__header">
@@ -141,7 +156,10 @@ export function EmployeePanel() {
               type="text"
               placeholder="Search employees"
               value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
+              onChange={(event) => {
+                setSearchTerm(event.target.value)
+                setCurrentPage(1)
+              }}
             />
           </label>
         </div>
@@ -184,7 +202,7 @@ export function EmployeePanel() {
             ))}
           </div>
           {filteredEmployees.length ? (
-            filteredEmployees.map((employee) => (
+            paginatedEmployees.map((employee) => (
               <div key={employee.id} className="management-table__row" style={{ gridTemplateColumns }}>
                 <span className="management-table__actions">
                   <button type="button" aria-label="View employee profile" onClick={() => handleSelectEmployee(employee.id)}>
@@ -204,6 +222,13 @@ export function EmployeePanel() {
             </div>
           )}
         </div>
+        <TablePagination
+          currentPage={currentPage}
+          totalItems={filteredEmployees.length}
+          pageSize={pageSize}
+          onPageChange={setCurrentPage}
+          itemLabel="employees"
+        />
         <div className="management-card__footer">
           <button className="management-card__primary" type="button" onClick={handleDownloadRoster}>
             ⬇ Download Roster

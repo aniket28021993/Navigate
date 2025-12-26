@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react'
+import { TablePagination } from '../shared/components/TablePagination'
+
 const equipmentRows = [
   {
     unitNumber: 'Unit 18',
@@ -8,6 +11,18 @@ const equipmentRows = [
 ]
 
 export function EquipmentPanel() {
+  const [currentPage, setCurrentPage] = useState(1)
+  const pageSize = 6
+  const totalPages = Math.max(1, Math.ceil(equipmentRows.length / pageSize))
+  const startIndex = (currentPage - 1) * pageSize
+  const paginatedRows = equipmentRows.slice(startIndex, startIndex + pageSize)
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages)
+    }
+  }, [currentPage, totalPages])
+
   return (
     <div className="management-view">
       <div className="management-view__header">
@@ -42,7 +57,7 @@ export function EquipmentPanel() {
             ))}
           </div>
           {equipmentRows.length ? (
-            equipmentRows.map((row) => (
+            paginatedRows.map((row) => (
               <div key={row.vin} className="management-table__row">
                 <span data-label="Unit Number">{row.unitNumber}</span>
                 <span data-label="Unit Type">{row.unitType}</span>
@@ -56,6 +71,13 @@ export function EquipmentPanel() {
             </div>
           )}
         </div>
+        <TablePagination
+          currentPage={currentPage}
+          totalItems={equipmentRows.length}
+          pageSize={pageSize}
+          onPageChange={setCurrentPage}
+          itemLabel="equipment entries"
+        />
       </div>
     </div>
   )

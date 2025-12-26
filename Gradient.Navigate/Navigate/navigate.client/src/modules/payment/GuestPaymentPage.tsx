@@ -1,5 +1,6 @@
 import type { FormEvent } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { TablePagination } from '../shared/components/TablePagination'
 
 const paymentRows = [
   {
@@ -23,11 +24,22 @@ interface GuestPaymentPageProps {
 export function GuestPaymentPage({ onBackToLogin }: GuestPaymentPageProps) {
   const [activeTab, setActiveTab] = useState<'card' | 'ach'>('card')
   const [status, setStatus] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const pageSize = 4
+  const totalPages = Math.max(1, Math.ceil(paymentRows.length / pageSize))
+  const startIndex = (currentPage - 1) * pageSize
+  const paginatedRows = paymentRows.slice(startIndex, startIndex + pageSize)
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setStatus('Guest payment submitted. A receipt will be emailed shortly.')
   }
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages)
+    }
+  }, [currentPage, totalPages])
 
   return (
     <div className="guest-payment-page">
@@ -57,6 +69,7 @@ export function GuestPaymentPage({ onBackToLogin }: GuestPaymentPageProps) {
                 onClick={() => {
                   setActiveTab('card')
                   setStatus('Credit card payments selected.')
+                  setCurrentPage(1)
                 }}
               >
                 Credit Card
@@ -67,6 +80,7 @@ export function GuestPaymentPage({ onBackToLogin }: GuestPaymentPageProps) {
                 onClick={() => {
                   setActiveTab('ach')
                   setStatus('ACH payments selected.')
+                  setCurrentPage(1)
                 }}
               >
                 ACH
@@ -80,7 +94,7 @@ export function GuestPaymentPage({ onBackToLogin }: GuestPaymentPageProps) {
                 <span>Processing</span>
                 <span>Availability</span>
               </div>
-              {paymentRows.map((row) => (
+              {paginatedRows.map((row) => (
                 <div key={row.method} className="management-table__row">
                   <span data-label="Payment Method">{row.method}</span>
                   <span data-label="Type">{row.type}</span>
@@ -89,6 +103,13 @@ export function GuestPaymentPage({ onBackToLogin }: GuestPaymentPageProps) {
                 </div>
               ))}
             </div>
+            <TablePagination
+              currentPage={currentPage}
+              totalItems={paymentRows.length}
+              pageSize={pageSize}
+              onPageChange={setCurrentPage}
+              itemLabel="payment methods"
+            />
             <div className="management-card__footer guest-payment__footer">
               <div className="guest-payment__panel">
                 <div className="guest-payment__panel-header">
