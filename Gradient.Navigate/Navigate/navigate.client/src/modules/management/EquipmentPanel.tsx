@@ -146,7 +146,7 @@ export function EquipmentPanel() {
             />
           </label>
         </div>
-        <div className="management-table">
+        <div className="management-table management-table--equipment">
           <div className="management-table__row management-table__row--header">
             <span>Unit Number</span>
             <span>Unit Type</span>
