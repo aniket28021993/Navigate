@@ -920,8 +920,11 @@
 }
 
 .management-table--payments .management-table__row {
-  grid-template-columns: minmax(180px, 1.2fr) repeat(3, minmax(120px, 1fr));
-  min-width: 720px;
+  grid-template-columns:
+    minmax(120px, 1fr)
+    minmax(180px, 1.4fr)
+    repeat(3, minmax(120px, 1fr));
+  min-width: 820px;
 }
 
 .management-card__footer {
