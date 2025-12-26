@@ -1,24 +1,19 @@
 import { useMemo, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { AppShell } from '../shared/layout/AppShell'
 import { navigationItems } from '../shared/layout/navigationItems'
 import { employeeRows } from './employeeData'
 
-const parseEmployeeId = () => {
-  const hash = window.location.hash.replace('#', '')
-  if (!hash.startsWith('employee/')) {
-    return null
-  }
-  return decodeURIComponent(hash.replace('employee/', ''))
-}
-
 export function EmployeeProfilePage() {
+  const navigate = useNavigate()
+  const { employeeId } = useParams<{ employeeId?: string }>()
   const [activeTab, setActiveTab] = useState<'general' | 'documents' | 'emergency'>('general')
   const [status, setStatus] = useState('')
   const [shellMessage, setShellMessage] = useState('')
-  const employeeId = useMemo(parseEmployeeId, [])
+  const decodedEmployeeId = useMemo(() => (employeeId ? decodeURIComponent(employeeId) : null), [employeeId])
   const selectedEmployee = useMemo(
-    () => employeeRows.find((employee) => employee.id === employeeId) ?? null,
-    [employeeId],
+    () => employeeRows.find((employee) => employee.id === decodedEmployeeId) ?? null,
+    [decodedEmployeeId],
   )
 
   const downloadFile = (filename: string, content: string, type: string) => {
@@ -43,9 +38,7 @@ export function EmployeeProfilePage() {
   }
 
   const handleReturnToList = () => {
-    if (window.location.hash !== '#dashboard') {
-      window.location.hash = '#dashboard'
-    }
+    navigate('/dashboard/employee')
   }
 
   const shellContent = !selectedEmployee ? (
@@ -195,7 +188,11 @@ export function EmployeeProfilePage() {
     <AppShell
       navigationLinks={navigationItems}
       activeNavigationKey="employee"
-      onNavigationSelect={(key) => setShellMessage(`Navigated to ${key} workspace.`)}
+      onNavigationSelect={(key) => {
+        const target = key === 'dashboard' ? '/dashboard' : `/dashboard/${key}`
+        navigate(target)
+        setShellMessage(`Navigated to ${key} workspace.`)
+      }}
       actionMessage={shellMessage}
       onHeaderAction={(action) => setShellMessage(`${action} action queued.`)}
     >

@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { employeeRows } from './employeeData'
 
 const employeeColumns = [
@@ -20,6 +21,7 @@ const columnLabels = employeeColumns.reduce<Record<string, string>>((acc, column
 }, {})
 
 export function EmployeePanel() {
+  const navigate = useNavigate()
   const [status, setStatus] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [filters, setFilters] = useState<Record<string, string>>({})
@@ -104,8 +106,7 @@ export function EmployeePanel() {
   }
 
   const handleSelectEmployee = (employeeId: string) => {
-    const target = `${window.location.origin}${window.location.pathname}#employee/${encodeURIComponent(employeeId)}`
-    window.location.assign(target)
+    navigate(`/employee/${encodeURIComponent(employeeId)}`)
   }
 
   return (
