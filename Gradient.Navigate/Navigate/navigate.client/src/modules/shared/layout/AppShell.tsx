@@ -54,8 +54,8 @@ export function AppShell({
             <p className="app-shell__mobile-title">NaviGATE</p>
             <span className="app-shell__mobile-subtitle">Fleet pulse &amp; quick actions</span>
           </div>
-          <button className="app-shell__mobile-action" type="button" onClick={() => onHeaderAction?.('Create load')}>
-            Create load
+          <button className="app-shell__mobile-action" type="button" onClick={() => onHeaderAction?.('Settings')}>
+            Settings
           </button>
         </div>
         {navigationLinks.length ? (
@@ -79,11 +79,11 @@ export function AppShell({
             <p className="app-shell__subtitle">Today&apos;s fleet status and compliance checks.</p>
           </div>
           <div className="app-shell__header-actions">
-            <button className="app-shell__ghost" type="button" onClick={() => onHeaderAction?.('Create load')}>
-              Create load
+            <button className="app-shell__ghost" type="button" onClick={() => onHeaderAction?.('Settings')}>
+              Settings
             </button>
-            <button className="app-shell__action" type="button" onClick={() => onHeaderAction?.('Secure session')}>
-              Secure Session
+            <button className="app-shell__action" type="button" onClick={() => onHeaderAction?.('Logout')}>
+              Logout
             </button>
           </div>
         </header>

@@ -105,11 +105,7 @@ export function EmployeePanel() {
 
   const handleSelectEmployee = (employeeId: string) => {
     const target = `${window.location.origin}${window.location.pathname}#employee/${encodeURIComponent(employeeId)}`
-    const newWindow = window.open(target, '_blank', 'noopener,noreferrer')
-    if (!newWindow) {
-      setStatus('Popup blocked. Opening employee profile in the current tab instead.')
-      window.location.assign(target)
-    }
+    window.location.assign(target)
   }
 
   return (
