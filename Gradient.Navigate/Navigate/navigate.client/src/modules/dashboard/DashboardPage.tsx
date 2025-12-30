@@ -9,92 +9,153 @@ import { EquipmentPanel } from '../management/EquipmentPanel'
 import { PaymentPanel } from '../management/PaymentPanel'
 import { CompanySettingsPanel } from '../settings/CompanySettingsPanel'
 import { UserSettingsPanel } from '../settings/UserSettingsPanel'
-import { TablePagination } from '../shared/components/TablePagination'
 
-const stats = [
-  { label: 'Loads in transit', value: '128', trend: '+12% vs last week' },
-  { label: 'On-time delivery', value: '94.2%', trend: 'Maintained target' },
-  { label: 'Open exceptions', value: '6', trend: '2 urgent alerts' },
-  { label: 'Active drivers', value: '58', trend: '4 pending check-ins' },
+const summaryCards = [
+  { label: 'Active Drivers', value: '24', icon: '👥', tone: 'primary' },
+  { label: 'Active Vehicles', value: '18', icon: '🚚', tone: 'success' },
+  { label: 'Monthly Revenue', value: '$12.4K', icon: '💲', tone: 'purple' },
+  { label: 'Compliance Rate', value: '94%', icon: '⚡', tone: 'warning' },
 ]
 
-const loads = [
+const randomTests = [
+  { name: 'Sarah Johnson', type: 'Drug Test', date: 'Nov 28, 2025', status: 'Scheduled' },
+  { name: 'Michael Chen', type: 'Drug Test', date: 'Nov 28, 2025', status: 'Scheduled' },
+  { name: 'David Martinez', type: 'Drug Test', date: 'Nov 28, 2025', status: 'Scheduled' },
+  { name: 'Emily Davis', type: 'Alcohol Test', date: 'Nov 28, 2025', status: 'Completed' },
+]
+
+const invoiceStatus = [
+  { label: 'Paid', value: 45, tone: 'paid' },
+  { label: 'Pending', value: 8, tone: 'pending' },
+  { label: 'Overdue', value: 3, tone: 'overdue' },
+]
+
+const contactsByRole = [
+  { label: 'Accounting DS', value: 24 },
+  { label: 'Accounting VS', value: 6 },
+  { label: 'Navigate Admin', value: 4 },
+  { label: 'Primary Contact DS', value: 5 },
+  { label: 'Primary Contact VS', value: 3 },
+]
+
+const topEquipment = [
+  { name: 'Freightliner Cascadia 2023', type: 'Tractor', status: 'Operational', miles: '45,230 mi' },
+  { name: 'Volvo VNL 860 2022', type: 'Tractor', status: 'Operational', miles: '68,450 mi' },
+  { name: 'Utility Dry Van 53ft', type: 'Trailer', status: 'In Service', miles: 'N/A' },
+  { name: 'Kenworth T680 2023', type: 'Tractor', status: 'Operational', miles: '38,210 mi' },
+  { name: 'Great Dane Refrigerated', type: 'Trailer', status: 'Operational', miles: '52,900 mi' },
+]
+
+const programParticipants = [
   {
-    id: 'LD-2048',
-    client: 'West Canyon Foods',
-    route: 'Phoenix, AZ → Denver, CO',
-    eta: '16:45 MST',
-    status: 'In Transit',
+    name: 'David Martinez',
+    role: 'Driver',
+    program: 'Drug & Alcohol Testing',
+    status: 'Active',
   },
   {
-    id: 'LD-2051',
-    client: 'Blue Ridge Retail',
-    route: 'Austin, TX → Omaha, NE',
-    eta: '18:30 CST',
-    status: 'At Pickup',
+    name: 'James Wilson',
+    role: 'Driver',
+    program: 'Drug & Alcohol Testing',
+    status: 'Active',
   },
   {
-    id: 'LD-2054',
-    client: 'Tri City Grocers',
-    route: 'Las Vegas, NV → Boise, ID',
-    eta: '20:10 PST',
-    status: 'Delayed',
+    name: 'Robert Brown',
+    role: 'Driver',
+    program: 'Physical Examinations',
+    status: 'Pending',
+  },
+  {
+    name: 'Emily Davis',
+    role: 'Driver',
+    program: 'Physical Examinations',
+    status: 'Active',
+  },
+  {
+    name: 'Lisa Anderson',
+    role: 'Manager',
+    program: 'Safety Training',
+    status: 'Active',
+  },
+  {
+    name: 'Jennifer Garcia',
+    role: 'Driver',
+    program: 'Drug & Alcohol Testing',
+    status: 'Active',
   },
 ]
 
-const activity = [
+const quickActions = ['Add a New Driver', 'Request a New Test', 'Add a New Vehicle', 'Pay My Bill']
+
+const servicesManaged = [
   {
-    time: '08:15 AM',
-    title: 'Driver check-in completed',
-    detail: 'Unit 18 • Mileage logged 12,140 mi',
+    title: 'Business Setup & Maintenance',
+    description:
+      'Starting and maintaining an FMCSA-compliant business is no small feat — and missing key steps can be costly.',
+    bullets: [
+      'Business Name Registration and Licensing',
+      'Employee Identification Number (EIN)',
+      'Operating Authority, USDOT #, and Process Agents',
+    ],
+    tone: 'default',
   },
   {
-    time: '09:05 AM',
-    title: 'Customs docs uploaded',
-    detail: 'Shipment LD-2051 • 4 files attached',
+    title: 'Permits & Registrations',
+    description:
+      'Ensure your fleet operates legally across all jurisdictions with proper permits and registrations.',
+    bullets: [
+      'IRP (International Registration Plan)',
+      'IFTA (International Fuel Tax Agreement)',
+      'UCR (Unified Carrier Registration)',
+      'Operating Authority Renewals',
+    ],
+    tone: 'default',
   },
   {
-    time: '10:42 AM',
-    title: 'Temperature alert cleared',
-    detail: 'Reefer 07 • Restored to 39°F',
+    title: 'Drug & Alcohol Program Management',
+    description:
+      'Stay compliant with DOT drug and alcohol testing requirements with comprehensive program management.',
+    bullets: ['Random Testing Program', 'Pre-Employment Screening', 'Post-Accident Testing', 'DOT Compliance Support'],
+    tone: 'default',
+  },
+  {
+    title: 'Specimen Collections',
+    description:
+      'Professional and certified specimen collection services for drug and alcohol testing.',
+    bullets: [
+      'Certified Collection Sites',
+      'Urine Drug Testing',
+      'Breath Alcohol Testing',
+      'Chain of Custody Procedures',
+    ],
+    tone: 'default',
+  },
+  {
+    title: 'Physical Examinations',
+    description:
+      'DOT medical examinations conducted by certified medical examiners to ensure driver qualification.',
+    bullets: ['DOT Physical Exams', 'Medical Certificate Issuance', 'CDL Medical Card Processing', 'Vision and Hearing Tests'],
+    tone: 'default',
+  },
+  {
+    title: 'Additional Available Services',
+    description:
+      'Expand your compliance coverage with these additional services. Contact us to learn more about adding these.',
+    bullets: [
+      'Fuel Tax & Weight Mile Reporting',
+      'IRP Credentialing',
+      'Electronic Logging Devices (ELD)',
+      'FMCSA CDL Clearinghouse Management',
+      'Driver Qualification File Management',
+    ],
+    tone: 'alert',
   },
 ]
 
-const modules = [
-  {
-    name: 'Client Management',
-    description: 'Account onboarding, contracts, and billing sync.',
-  },
-  {
-    name: 'Carrier Network',
-    description: 'Brokerage partners, capacity tiers, and scorecards.',
-  },
-  {
-    name: 'Dispatch Console',
-    description: 'Driver assignments, messaging, and live tracking.',
-  },
-  {
-    name: 'Compliance',
-    description: 'DOT renewals, insurance audits, and safety logs.',
-  },
-]
-
-const tasks = [
-  {
-    title: 'Approve access for Mayfield Logistics',
-    owner: 'Security Desk',
-    due: 'Today',
-  },
-  {
-    title: 'Update fuel surcharge table',
-    owner: 'Pricing Team',
-    due: 'Tomorrow',
-  },
-  {
-    title: 'Review weekly utilization report',
-    owner: 'Operations',
-    due: 'Friday',
-  },
+const upcomingActivities = [
+  { title: 'DOT Physical Renewal - Driver: Sarah Johnson', due: 'Due in 5 days (Dec 1, 2025)', tone: 'warning' },
+  { title: 'Random Drug Test - 3 drivers scheduled', due: 'Scheduled for Nov 28, 2025', tone: 'info' },
+  { title: 'IRP Registration Renewal', due: 'Due in 12 days (Dec 3, 2025)', tone: 'danger' },
 ]
 
 export function DashboardPage() {
@@ -102,14 +163,7 @@ export function DashboardPage() {
   const { section } = useParams<{ section?: string }>()
   const [activeModule, setActiveModule] = useState<NavigationKey>('dashboard')
   const [feedback, setFeedback] = useState('')
-  const [loadsPage, setLoadsPage] = useState(1)
   const validKeys = useMemo(() => new Set(navigationItems.map((item) => item.key)), [])
-  const loadsPageSize = 4
-  const loadsTotalPages = Math.max(1, Math.ceil(loads.length / loadsPageSize))
-  const paginatedLoads = useMemo(() => {
-    const startIndex = (loadsPage - 1) * loadsPageSize
-    return loads.slice(startIndex, startIndex + loadsPageSize)
-  }, [loadsPage, loadsPageSize])
 
   useEffect(() => {
     if (!section) {
@@ -122,12 +176,6 @@ export function DashboardPage() {
     }
     setActiveModule(section as NavigationKey)
   }, [navigate, section, validKeys])
-
-  useEffect(() => {
-    if (loadsPage > loadsTotalPages) {
-      setLoadsPage(loadsTotalPages)
-    }
-  }, [loadsPage, loadsTotalPages])
 
   const handleFeedback = (message: string) => {
     setFeedback(message)
@@ -172,126 +220,265 @@ export function DashboardPage() {
       onHeaderAction={(action) => handleFeedback(`${action} action queued.`)}
     >
       {activeModule === 'dashboard' ? (
-        <div className="dashboard">
-          <section className="dashboard__stats">
-            {stats.map((item) => (
-              <article key={item.label} className="stat-card">
-                <p className="stat-card__label">{item.label}</p>
-                <h3>{item.value}</h3>
-                <span className="stat-card__trend">{item.trend}</span>
+        <div className="dashboard dashboard--compliance">
+          <header className="dashboard__title">
+            <div>
+              <h1>Dashboard</h1>
+              <p>Overview of your system.</p>
+            </div>
+            <div className="dashboard__company-chip">
+              <span>Company</span>
+              <strong>Pro-Demo Hauling Transportation</strong>
+            </div>
+          </header>
+
+          <section className="summary-grid">
+            {summaryCards.map((item) => (
+              <article key={item.label} className={`summary-card summary-card--${item.tone}`}>
+                <div>
+                  <p>{item.label}</p>
+                  <h3>{item.value}</h3>
+                </div>
+                <div className="summary-card__icon" aria-hidden="true">
+                  {item.icon}
+                </div>
               </article>
             ))}
           </section>
 
-          <section className="dashboard__grid">
-            <article className="data-card">
+          <section className="dashboard__grid dashboard__grid--wide">
+            <article className="data-card data-card--scroll">
               <header className="data-card__header">
-                <div>
-                  <h2>Active loads</h2>
-                  <p>Latest dispatch milestones across today&apos;s shipments.</p>
+                <div className="data-card__title">
+                  <span className="data-card__accent data-card__accent--red" />
+                  <div>
+                    <h2>Random Test Schedule</h2>
+                  </div>
                 </div>
-                <button
-                  className="data-card__action"
-                  type="button"
-                  onClick={() => handleFeedback('Active loads view opened.')}
-                >
-                  View all
-                </button>
               </header>
-              <div className="data-table">
-                <div className="data-table__row data-table__row--header">
-                  <span>Load</span>
-                  <span>Client</span>
-                  <span>Route</span>
-                  <span>ETA</span>
-                  <span>Status</span>
-                </div>
-                {paginatedLoads.map((load) => (
-                  <div key={load.id} className="data-table__row">
-                    <span data-label="Load">{load.id}</span>
-                    <span data-label="Client">{load.client}</span>
-                    <span data-label="Route">{load.route}</span>
-                    <span data-label="ETA">{load.eta}</span>
+              <div className="schedule-list">
+                {randomTests.map((test) => (
+                  <div key={`${test.name}-${test.type}`} className="schedule-item">
+                    <div>
+                      <p className="schedule-item__name">{test.name}</p>
+                      <p className="schedule-item__detail">
+                        {test.type} · {test.date}
+                      </p>
+                    </div>
                     <span
-                      data-label="Status"
-                      className={`status-pill status-pill--${load.status.replace(' ', '').toLowerCase()}`}
+                      className={`schedule-item__status schedule-item__status--${test.status.toLowerCase()}`}
                     >
-                      {load.status}
+                      {test.status}
                     </span>
                   </div>
                 ))}
               </div>
-              <TablePagination
-                currentPage={loadsPage}
-                totalItems={loads.length}
-                pageSize={loadsPageSize}
-                onPageChange={setLoadsPage}
-                itemLabel="loads"
-              />
             </article>
 
             <article className="data-card">
               <header className="data-card__header">
-                <div>
-                  <h2>Today&apos;s activity</h2>
-                  <p>Live operational updates from the field.</p>
+                <div className="data-card__title">
+                  <span className="data-card__accent data-card__accent--green" />
+                  <div>
+                    <h2>Invoice Status</h2>
+                  </div>
                 </div>
               </header>
-              <div className="activity-list">
-                {activity.map((item) => (
-                  <div key={item.title} className="activity-item">
-                    <span className="activity-item__time">{item.time}</span>
-                    <div>
-                      <p className="activity-item__title">{item.title}</p>
-                      <p className="activity-item__detail">{item.detail}</p>
+              <div className="invoice-status">
+                <div className="invoice-status__chart" aria-hidden="true" />
+                <div className="invoice-status__legend">
+                  {invoiceStatus.map((item) => (
+                    <div key={item.label} className="invoice-status__item">
+                      <span className={`invoice-status__dot invoice-status__dot--${item.tone}`} />
+                      <div>
+                        <p>{item.label}</p>
+                        <strong>{item.value}</strong>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-              <div className="data-card__footer">
-                <button
-                  className="data-card__action"
-                  type="button"
-                  onClick={() => handleFeedback('Alert review queue opened.')}
-                >
-                  Review alerts
-                </button>
+                  ))}
+                </div>
               </div>
             </article>
           </section>
 
-          <section className="dashboard__grid dashboard__grid--secondary">
+          <section className="dashboard__grid dashboard__grid--wide">
             <article className="data-card">
               <header className="data-card__header">
-                <div>
-                  <h2>Module coverage</h2>
-                  <p>Architecture blocks prepared for API integration.</p>
+                <div className="data-card__title">
+                  <span className="data-card__accent data-card__accent--blue" />
+                  <div>
+                    <h2>Contacts by Role</h2>
+                  </div>
                 </div>
               </header>
-              <div className="module-grid">
-                {modules.map((module) => (
-                  <article key={module.name} className="module-card">
-                    <h3>{module.name}</h3>
-                    <p>{module.description}</p>
-                  </article>
+              <div className="bar-chart">
+                {contactsByRole.map((item) => (
+                  <div key={item.label} className="bar-chart__row">
+                    <span>{item.label}</span>
+                    <div className="bar-chart__bar">
+                      <div style={{ width: `${(item.value / 24) * 100}%` }} />
+                    </div>
+                    <strong>{item.value}</strong>
+                  </div>
                 ))}
               </div>
             </article>
-            <article className="data-card">
+
+            <article className="data-card data-card--scroll">
               <header className="data-card__header">
-                <div>
-                  <h2>Priority tasks</h2>
-                  <p>Next actions for your team.</p>
+                <div className="data-card__title">
+                  <span className="data-card__accent data-card__accent--purple" />
+                  <div>
+                    <h2>Top 5 Equipment</h2>
+                  </div>
                 </div>
               </header>
-              <div className="task-list">
-                {tasks.map((task) => (
-                  <div key={task.title} className="task-item">
+              <div className="equipment-list">
+                {topEquipment.map((item) => (
+                  <div key={item.name} className="equipment-item">
                     <div>
-                      <p className="task-item__title">{task.title}</p>
-                      <p className="task-item__owner">{task.owner}</p>
+                      <p className="equipment-item__name">{item.name}</p>
+                      <span className="equipment-item__type">{item.type}</span>
                     </div>
-                    <span className="task-item__due">{task.due}</span>
+                    <div className="equipment-item__meta">
+                      <span
+                        className={`equipment-item__status equipment-item__status--${item.status.replace(' ', '').toLowerCase()}`}
+                      >
+                        {item.status}
+                      </span>
+                      <span className="equipment-item__miles">{item.miles}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </article>
+          </section>
+
+          <section className="dashboard__grid dashboard__grid--wide">
+            <article className="data-card data-card--scroll">
+              <header className="data-card__header">
+                <div className="data-card__title">
+                  <span className="data-card__accent data-card__accent--purple" />
+                  <div>
+                    <h2>Program Participants</h2>
+                  </div>
+                </div>
+              </header>
+              <div className="participants-grid">
+                {programParticipants.map((participant) => (
+                  <div key={`${participant.name}-${participant.program}`} className="participant-card">
+                    <div>
+                      <p className="participant-card__name">{participant.name}</p>
+                      <p className="participant-card__detail">
+                        {participant.role}
+                        <span>{participant.program}</span>
+                      </p>
+                    </div>
+                    <span
+                      className={`participant-card__status participant-card__status--${participant.status.toLowerCase()}`}
+                    >
+                      {participant.status}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </article>
+          </section>
+
+          <section className="data-card">
+            <header className="data-card__header">
+              <div className="data-card__title">
+                <span className="data-card__accent data-card__accent--green" />
+                <div>
+                  <h2>Quick Actions</h2>
+                </div>
+              </div>
+            </header>
+            <div className="quick-actions">
+              {quickActions.map((action) => (
+                <button key={action} className="quick-action" type="button" onClick={() => handleFeedback(action)}>
+                  {action}
+                </button>
+              ))}
+            </div>
+          </section>
+
+          <section className="services">
+            <header className="services__header">
+              <div>
+                <h2>Services Managed</h2>
+                <p>Hover over each card to view details.</p>
+              </div>
+              <button className="services__link" type="button">
+                View All →
+              </button>
+            </header>
+            <div className="services__grid">
+              {servicesManaged.map((service) => (
+                <article key={service.title} className={`service-card service-card--${service.tone}`}>
+                  <div className="service-card__head">
+                    <div className="service-card__title">
+                      <span className="service-card__dot" />
+                      <h3>{service.title}</h3>
+                    </div>
+                    <span className="service-card__chevron">⌃</span>
+                  </div>
+                  <div className="service-card__details">
+                    <p>{service.description}</p>
+                    <ul>
+                      {service.bullets.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="dashboard__grid dashboard__grid--wide">
+            <article className="data-card">
+              <header className="data-card__header">
+                <div className="data-card__title">
+                  <span className="data-card__accent data-card__accent--green" />
+                  <div>
+                    <h2>Billing</h2>
+                  </div>
+                </div>
+              </header>
+              <div className="billing-card">
+                <div className="billing-card__balance">
+                  <span>Balance Due</span>
+                  <strong>$785.00</strong>
+                </div>
+                <div className="billing-card__progress">
+                  <div className="billing-card__bar" />
+                </div>
+                <div className="billing-card__actions">
+                  <button type="button" className="billing-card__pay" onClick={() => handleFeedback('Pay My Bill')}>
+                    Pay My Bill
+                  </button>
+                  <button type="button" className="billing-card__secondary">
+                    See Invoices
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <article className="data-card">
+              <header className="data-card__header">
+                <div className="data-card__title">
+                  <span className="data-card__accent data-card__accent--orange" />
+                  <div>
+                    <h2>Upcoming Activities</h2>
+                  </div>
+                </div>
+              </header>
+              <div className="activity-cards">
+                {upcomingActivities.map((item) => (
+                  <div key={item.title} className={`activity-card activity-card--${item.tone}`}>
+                    <p>{item.title}</p>
+                    <span>{item.due}</span>
                   </div>
                 ))}
               </div>
